@@ -46,7 +46,6 @@ nav > ul li a {
               -ms-transition: all .3s ease;
               -o-transition: all .3s ease;
               transition: all .3s ease;
-              
 			  }
 			  
 nav > ul > li a span {
@@ -78,26 +77,5 @@ nav > ul > li a:hover > span {
 	
 	
 	                           }
-
-
-.navbar{
-	background-color:green;
-	 
-}
-
-.navbar-brand,.navbar-brand:hover{
-  background-color:green;
-  color: white;
-  
-}
-
-.nav-link{
-  color: white;
-}
-
-.nav-link:hover{
-  color: white;
-  background-color: orange;
-}
 			  
 			  

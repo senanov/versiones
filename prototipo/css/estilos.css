@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 input[type="submit"]
 {
 	background:#088A08;
@@ -18,79 +18,29 @@ input[type="submit"]:hover
 {
 	background:#0C0;
 	}
-input[type="submit"]:active{
-transform: scale(1.2);
-}
 
 body
 {
 	margin:0;
 	padding:0;
-	background-color:#204862;
+	
 	min-height:100vh;
 	flex-wra:wra;
 	}
-
-
-	.fila{
- 
-
-background-color:#204862;
-
-height: 500px;
-
-/*box-shadow:0px 0px 20px #000000, 0px 0px;	*/
-
-}
-
-.sect{
-background-color: #ccc;
-
-
-}
-
-.con{
-
-	background-color: white;
-}
-
-.columna > img {
- 
- padding: 14px 0px ;
- width: 100%;
- height: 100%;
-
-
-}
-
-.columna{
- 
-
-border:2px solid black;
-background-color:#ccc;
-box-shadow:0px 0px 40px #00CC00, 0px 0px;
-border-radius: 10px;
-}
 	
-.container{
 
-	max-width: 1350px;
-}
-
-
-
-/*.banner{
+.banner{
 	background-color:#088A08;
 	position:absolute;
 	width:100%;
 	height:90px;
-	border-radius:0px;
+	border-radius:20px;
 	margin:0;
 	padding:0;
-	border:1px solid black;
+	border:1px solid #00C;
 	right:0.5px;
 	z-index:200;
-	}*/
+	}
 footer
 {
 	align-self:flex-end;
@@ -112,7 +62,7 @@ footer > img
 
 	}
 
-/*.img{
+.img{
 	position:absolute;
 	right:35px;
 	top:1px;	
@@ -122,29 +72,41 @@ footer > img
 .logo{
 	position:absolute;
 	left:50px;
-	}*/
+	}
 	
 p{
 	font-family:Calibri Light (Títulos);
 	}
-
 .letra > p{
 	font-size:24px;
 	text-align:justify;
 	padding:5px 10px;
+	
 	}
-
- .columna > h1 {
-	text-align: center;
-}
-
+table {
+	
+	background-color:#CCC;		
+	}
+	
+td{
+	background-color:#fff;
+	box-shadow:0px 0px 20px #00CC00, 0px 0px;	
+	}
+	
 
 .login {
 	box-shadow:0px 0px 40px #00CC00, 0px 0px;
 	margin:auto;	
 	}
 
-
+* {
+	
+	mangin:0;
+	padding:0;
+	-webkit-box-sizing:border-box;
+	
+	
+  }
 
 .social {	
 	position:fixed;
@@ -206,7 +168,6 @@ input
 	border-radius:10px;
 	border-top-style:groove;
 	margin-bottom:20px;
-	max-width: 95%;
 	
 	
 	
@@ -220,29 +181,4 @@ form > p{
 	
 	}
 
-.navbar{
-	background-color:green;
-	margin-right: 16px;
-	 
-}
 
-.navbar-brand,.navbar-brand:hover{
-  background-color:green;
-  color: white;
-  
-}
-
-.nav-link{
-  color: white;
-}
-
-.nav-link:hover{
-  color: white;
-  background-color: #FF4000;
-}
-
-.slider
-{
-	width: 1350px;
-	margin: auto;
-}
