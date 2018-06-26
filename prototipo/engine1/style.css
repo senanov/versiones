@@ -3,10 +3,11 @@
  *	template Numeric
  */
 
+
 #wowslider-container1 { 
 	zoom: 1; 
 	position: relative; 
-	max-width:1350px;	
+	max-width:1340px;	
 	margin:5px auto 5px;	
 	z-index:100;
 	border:none;	

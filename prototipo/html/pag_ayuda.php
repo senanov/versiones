@@ -1,25 +1,22 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Senanov</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="icon" href="img/logo.ico" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet"  href="css/fonts.css" />
-<link rel="stylesheet" type="text/css" href="css/estilos.css" />
-<link rel="stylesheet" type="text/css" href="css/banner.css">
+<title>Documento sin título</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 
+
+<link rel="stylesheet" type="text/css" href="../css/banner.css">
+<link rel="stylesheet" type="text/css" href="../css/estilos.css">
+<link rel="stylesheet" type="text/css" href="../css/estilos_ayuda.css">
 </head>
 
 <body>
-
-
-	<div class="container-fluid"> 
+<div class="container-fluid"> 
 		<div class="header row">
 			<div class="animacion-izquierda col-12 col-sm-12 col-md-6 col-lg-3">
 				
-					<img src="img/logo.png" height="200">
+					<img src="../img/logo.png" height="200">
 					
 				
 				
@@ -29,16 +26,14 @@
 					<h1>SENANOV</h1>
 					<hr>
 					<p>Sistema de Información Especializado en la Gestión de Novedades en el CEET</p>
-					<div class="btn "><a href="html/registro/index.php">Registrate</a></div>
+					<div class="btn "><a href="registro/index">Registrate</a></div>
 				</div>
 			</div> 
 			<div class="animacion-derecha col-12 col-sm-12 col-md-12 col-lg-3 ">
-				<img src="img/ba.png" height="200">
+				<img src="../img/ba.png" height="200">
 			</div>
 		</div>
 	</div>
-	
-<!-- Menu -->
 
 <nav class="navbar navbar-expand-lg ">
   <a class="navbar-brand" href="#">SENANOV</a>
@@ -48,16 +43,16 @@
   <div class="collapse navbar-collapse "  id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active ">
-        <a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="../index.php">Inicio <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="html/registro/index">¿Ya estoy registrado?</a>
+        <a class="nav-link" href="registro/index">¿Ya estoy registrado?</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="html/pag_ayuda.php">¿Necesitas alguna ayuda?</a>
+        <a class="nav-link" href="pag_ayuda.php">¿Necesitas alguna ayuda?</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link"   href="html/servicios.php">
+        <a class="nav-link"   href="servicios.php">
           Servicios
         </a>
         <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -73,21 +68,23 @@
  <br /><br/>
 
 
-<?php include("html/social.php"); ?>
 
+<div class="ayuda" id="my_content" align="center">
+	<div class="div">
+		<img src="../img/contacto.png" width="1378" height="393">
+	</div>
+</div>
 
-<?php include("html/slider.php"); ?>
-<br><br><br>
-<?php include("html/login.php"); ?>
+<div class="ayuda1" id="my_content" align="center">
+	<div>
+		<p>Contactanos:</p>
+        <P>Nos esforzamos por proporcionarte servicios de la más alta calidad. Tus comentarios nos ayudan a mejorar.</P>
+        <P>Tomamos muy en serio tus opiniones. Por favor envianos cualquier comentario, pregunta o idea.</P>
+	</div>
+</div>
 
-
-
-
-
-
-<br /> <br />
 <footer>
-<img src="img/gsena.gif" width="150" height="102" />
+<img src="../img/gsena.gif" width="150" height="102" />
 Cristian Ortiz <br />
 Mónica Díaz <br />
 Daniel Acosta <br />
@@ -95,10 +92,8 @@ Felipe Pinzón <br />
 Juan David Ramirez | SENANOV
 </footer>
 
-    <script src="js/jquery-3.3.1.min.js"> </script>
-    <script src="js/bootstrap.min.js"> </script>
-    <script src="js/menu.js"></script>
 
-  
+<script src="../js/jquery-3.3.1.min.js"> </script>
+    <script src="../js/bootstrap.min.js"> </script>
 </body>
 </html>

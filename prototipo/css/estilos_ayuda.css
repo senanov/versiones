@@ -1,0 +1,32 @@
+.ayuda1{
+	align-self:flex-end;
+	background-color:#046275;
+	color:#FFF;
+	text-align:center;
+	font-size:20px;
+	transition:1000ms;
+	max-width:1378px;
+	margin:auto;
+	
+}
+.ayuda{
+	background-color:#204862;
+	
+	}
+
+.div  > img{
+	border-color:#FFF;
+	
+	}
+body{
+	margin:0;
+	padding:0;
+	background-color:#204862;
+	min-height:100vh;
+	flex-wra:wra;
+	}
+.ayuda1:hover{
+	background-color:#000;
+	
+	
+	}
