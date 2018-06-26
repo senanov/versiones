@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<?php
+session_start();
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Senanov</title>
@@ -33,7 +37,7 @@
 				</div>
 			</div> 
 			<div class="animacion-derecha col-12 col-sm-12 col-md-12 col-lg-3 ">
-				<img src="img/ba.png" height="200">
+				<img src="img/banner.png" height="200">
 			</div>
 		</div>
 	</div>
@@ -51,7 +55,7 @@
         <a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="html/registro/index">¿Ya estoy registrado?</a>
+        <a class="nav-link" href="html/consultar.php">¿Ya estoy registrado?</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="html/pag_ayuda.php">¿Necesitas alguna ayuda?</a>
@@ -71,7 +75,25 @@
  
 </nav>
  <br /><br/>
+<?php
 
+
+if (isset($_SESSION['error'])) 
+{
+if($_SESSION['error']==3)
+{
+   echo '<div class="alert alert-success alert-dismissible exito">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Exito! </strong>El usuario se a registrado satisfactoriamente
+    </div>';
+    $_SESSION['error']=0; 
+
+}
+
+}
+?>
+
+<br>
 
 <?php include("html/social.php"); ?>
 
