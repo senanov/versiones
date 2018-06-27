@@ -1,0 +1,35 @@
+[33mcommit 103697aaaea16a2f14a6e2fa8cd4f7a8057deabc[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin2/master[m[33m)[m
+Author: SENANOV <senanov2018@gmail.com>
+Date:   Mon Jun 25 23:07:50 2018 -0500
+
+    se pasa de programacion estructurada a POO adicionamente se implemente el MVC en el prototipo
+
+[33mcommit 4f900a5d5225e1571206f05646909bd460d6b026[m
+Author: SENANOV <senanov2018@gmail.com>
+Date:   Mon Jun 25 23:01:44 2018 -0500
+
+    se implementa la matriz crud en progrmacion estructurada creando asi los archivos de actualizar eliminar en la carpeta formularios ademas de implementar el uso de alerta en el codigo
+
+[33mcommit e13674b57c22cd657b8cd8dbac0497093404112f[m
+Author: SENANOV <senanov2018@gmail.com>
+Date:   Mon Jun 25 22:48:40 2018 -0500
+
+    se cambia la imagen de la posicion derecha del banner
+
+[33mcommit a59cc3b16afc178c100b3605d0b33e42a7a24353[m
+Author: SENANOV <senanov2018@gmail.com>
+Date:   Mon Jun 25 22:46:20 2018 -0500
+
+    se cambia la accion del hipervinculo ya estoy registrado y se adiciona una pagina php llamada consulta.php
+
+[33mcommit 0c0a111c93337c91552e91abfef3b6f527d95f2f[m
+Author: Juan David Martinez <senanov2018@gmail.com>
+Date:   Mon Jun 25 22:35:35 2018 -0500
+
+    se cambia la interfaz de usuario de color adicionalmete se adiciona la carpeta formularios
+
+[33mcommit 410cb2cae97faf62c629659738a912a5d5cdf7f1[m[33m ([m[1;32mtest[m[33m)[m
+Author: Juan David Martinez <senanov2018@gmail.com>
+Date:   Sat Jun 23 18:02:03 2018 -0500
+
+    Iniciamos Primer prototipo

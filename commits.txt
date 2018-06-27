@@ -1,5 +1,5 @@
 commit 410cb2cae97faf62c629659738a912a5d5cdf7f1
-Author: Juan David Martinez <senanov2018@gmail.com>
+Author: Juan David } <senanov2018@gmail.com>
 Date:   Sat Jun 23 18:02:03 2018 -0500
 
     Iniciamos Primer prototipo
