@@ -13,13 +13,13 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="index.php" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Consultar</a>
 
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">          
-          <a class="dropdown-item" href="index.php?action=reingreso">Reingreso</a>
-          <a class="dropdown-item" href="index.php?action=cambio_de_jornada">Cambio de Jornada</a>
-          <a class="dropdown-item" href="index.php?action=traslado">Traslado</a>
-           <a class="dropdown-item" href="index.php?action=retiros">Retiros</a>
-          <a class="dropdown-item" href="index.php?action=aplazamientos">Aplazamientos</a>
-          <a class="dropdown-item" href="index.php?action=deserciones">Deserciones</a>
+         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">          
+          <a class="dropdown-item" href="reingreso">Reingreso</a>
+          <a class="dropdown-item" href="cambio_jornada">Cambio de Jornada</a>
+          <a class="dropdown-item" href="traslado">Traslado</a>
+           <a class="dropdown-item" href="retiro">Retiros</a>
+          <a class="dropdown-item" href="aplazamiento">Aplazamientos</a>
+          <a class="dropdown-item" href="desercion">Deserciones</a>
         </div>
       </li>
 
@@ -30,7 +30,7 @@
       </li>
        
       <li class="nav-item">
-        <a class="nav-link" href="../conexion/salir.php">
+        <a class="nav-link" href="salir">
          Cerrar sesion
         </a>
       </li>
