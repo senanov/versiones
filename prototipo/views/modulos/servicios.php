@@ -24,8 +24,8 @@ que se tienen actualmente por parte del equipo administrativo y aprendices del C
 <section class="servicios-item">
 <img src="views/img/img2.png" />
 <section class="servicios-text">
-<h2>Actulizaciòn de las Novedades</h2>
-<p>Actulizar las novedades de manera correcta rapida para tener la informacion correcta y al dia</p>
+<h2>Actualizaciòn de las Novedades</h2>
+<p>Actualizar las novedades de manera correcta rapida para tener la informacion correcta y al dia</p>
 </section>
 </section>
 
@@ -48,8 +48,8 @@ que se tienen actualmente por parte del equipo administrativo y aprendices del C
 <section class="servicios-item">
 <img src="views/img/img5.png" />
 <section class="servicios-text">
-<h2>Eliminar informaciòn acerca de las novedades Novedades</h2>
-<p>Eliminar infromaciòn incorrecta o basura que el usuario desee sin afectar el correcto funcionamiento del software </p>
+<h2>Eliminar informaciòn acerca de las Novedades</h2>
+<p>Eliminar informaciòn incorrecta o basura que el usuario desee sin afectar el correcto funcionamiento del software </p>
 </section>
 </section>
 </section>

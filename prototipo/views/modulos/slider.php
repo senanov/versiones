@@ -1,17 +1,45 @@
 <?php
 
-if (isset($_GET["enlace"])) {
+if (isset($_GET["enlace"])) 
+{
 	
   if ($_GET["enlace"]=="ok") {
     echo '<div class="alert alert-success alert-dismissible exito">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Exito! </strong>El Usuario se a Registrado Satisfactoriamente
+    <strong>Exito! </strong>El Usuario se ha Registrado Satisfactoriamente
     </div>';
        
      }
-
-  
+ 
 }
+
+if (isset($_SESSION["correo"])) 
+{
+  if ($_SESSION["correo"]==1)
+  {
+    echo '<div class="alert alert-success alert-dismissible exito">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Exito!</strong>La contraseña se ha cambiado correctamente</div>';
+
+    $_SESSION["correo"]=0;
+  }
+}
+$login=$_SESSION["login"];
+
+if (isset($login)) 
+{
+  if ($login==1)
+  {
+   echo '<div class="alert alert-danger alert-dismissible exito">
+         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+         <strong>Aviso:</strong> Usuario o Contraseña incorrecta</div><br>';
+
+   $_SESSION["login"]=0;
+   
+  }
+}
+
+
 
 ?>
 <br>
@@ -32,25 +60,25 @@ if (isset($_GET["enlace"])) {
   <!-- The slideshow -->
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="views/img/slider/img1" height="400" width="1350" alt="CEET">
+      <img src="views/img/slider/img1.jpg" height="100%" width="100%" alt="CEET">
     </div>
     <div class="carousel-item">
-      <img src="views/img/slider/img2" height="400" width="1350" alt="CEET">
+      <img src="views/img/slider/img2.jpg" height="100%" width="100%" alt="CEET">
     </div>
     <div class="carousel-item">
-      <img src="views/img/slider/img3" height="400" width="1350" alt="CEEET">
+      <img src="views/img/slider/img3.jpg" height="100%" width="100%" alt="CEET">
     </div>
     <div class="carousel-item">
-      <img src="views/img/slider/img4" height="400" width="1350" alt="CEEET">
+      <img src="views/img/slider/img4.png" height="100%" width="100%" alt="CEET">
     </div>
     <div class="carousel-item">
-      <img src="views/img/slider/img5" height="400" width="1350" alt="CEEET">
+      <img src="views/img/slider/img5.jpg" height="100%" width="100%" alt="CEET">
     </div>
     <div class="carousel-item">
-      <img src="views/img/slider/img6" height="400" width="1350" alt="CEEET">
+      <img src="views/img/slider/img6.png" height="100%" width="100%" alt="CEET">
     </div>
     <div class="carousel-item">
-      <img src="views/img/slider/img7" height="400" width="1350" alt="CEEET">
+      <img src="views/img/slider/img7.jpg" height="100%" width="100%" alt="CEET">
     </div>
 
   </div>
@@ -86,9 +114,15 @@ if (isset($_GET["enlace"])) {
 
     </div>
     <div class="letra columna col-sm-12 col-md-12 col-lg-3">
-     <h1>OTRA COSA</h1>
+     <h1>Objetivos</h1>
 
-     <P>kdfnjkdsa nkjasfndkjsadfn kdsajfnaksjfn kadjsfnkjsdnfaksjf n</P>
+     <P>Tener un registro de fácil acceso de novedades del CEET  y el SENA.<br>
+
+        Facilitar y agilizar el registro de las novedades y mejorar el entorno laboral.<br>
+
+        Ofrecer a los aprendices un sistema donde pueden consultar y estar al tanto de sus novedades.
+
+</P>
 
     </div>
     </div>

@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Senanov</title>
@@ -8,14 +7,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" type="text/css" href="views/css/bootstrap.min.css">
 <link rel="icon" href="views/img/logo.ico" />
+<link rel="stylesheet"  href="views/css/icon.css" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet"  href="views/css/fonts.css" />
-<link rel="stylesheet" type="text/css" href="views/css/estilos.css" />
-<link rel="stylesheet" type="text/css" href="views/css/registro.css" />
 <link rel="stylesheet" type="text/css" href="views/css/banner.css">
-<link rel="stylesheet"  href="views/css/icon.css" /> 
 <link rel="stylesheet" type="text/css" href="views/css/estilos_ayuda.css">
 <link rel="stylesheet" href="views/css/estiloserv.css" />
+<link rel="stylesheet" type="text/css" href="views/css/registro.css" />
+<link rel="stylesheet" type="text/css" href="views/css/estilos.css" />
 
 
 </head>

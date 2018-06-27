@@ -3,13 +3,13 @@
 <div id="carouselExampleControls" class="slider carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="views/img/imagen1.jpg" height="400" alt="CEET">
+      <img class="d-block w-100" src="../views/img/imagen1.jpg" height="100%" width="100%" alt="CEET">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="views/img/imagen2.jpg" height="400" alt="CEET">
+      <img class="d-block w-100" src="../views/img/imagen2.jpg" height="100%" width="100%" alt="CEET">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="views/img/imagen3.jpg" height="400" alt="CEET">
+      <img class="d-block w-100" src="../views/img/imagen3.jpg" height="100%" width="100%" alt="CEET">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -36,7 +36,7 @@
 
 <div class="columna col-sm-12 col-md-4 col-lg-4">
 
-<img src="views/img/ba.png"/>
+<img src="../views/img/ba.png"/>
 </div>
 
 <div class="letra columna col-sm-12 col-md-4 col-lg-4">

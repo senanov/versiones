@@ -12,7 +12,7 @@
           <h1>SENANOV</h1>
           <hr>
           <p>Sistema de Información Especializado en la Gestión de Novedades en el CEET</p>
-          <div class="btn "><a href="index.php?enlace=registro">Registrate</a></div>
+          <div class="btn "><a href="registro">Registrate</a></div>
 
             <!-- Trigger the modal with a button -->
   <button type="button" class="btn" data-toggle="modal" data-target="#myModal">Login</button>
@@ -22,7 +22,7 @@
     <div class="modal-dialog">
     
       <!-- Modal content-->
-      <div class="modal-content">
+      <div class="contcolor modal-content">
 
         <div class="modal-body">
 
@@ -50,7 +50,7 @@
     </p>
   </form>
 
-  <center><a href="conexion/reestablecer.php">Restablecer Contraseña</a><br><br>
+  <center><a href="index.php?enlace=restablecer">Restablecer Contraseña</a><br><br>
      </div>
 
     </div>

@@ -8,12 +8,10 @@ body {
 
 margin: 0;
 font-family: sans-serif;
-background: #204862;
-
 }
 #h1{
 
-	color:#fff;
+	color:black;
 	text-align: center;
 
 }
@@ -24,17 +22,17 @@ background: #204862;
 	width: 95%;
 	max-width: 500px;
 	margin:auto;
-	background: #fff;
+	background: #8F8F8F;
 	border-radius: 7px;
 	top: 200px;
-	box-shadow: 0px 0px  20px #009900,0px 0px;
+	box-shadow: 0px 0px  20px #000000,0px 0px;
 }
 
 
 
 
 .titulo{
-	background: #00FF80;
+	background: black;
 	color: #fff;
 	padding: 15px;
 	text-align: center;

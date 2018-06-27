@@ -4,7 +4,6 @@ body
 {
 	margin:0;
 	padding:0;
-	background: #204862;
 	min-height:100vh;
 	flex-wra:wra;
 	}
@@ -12,7 +11,7 @@ body
 .fila
 {
 
-background-color:#204862;
+background-color: rgba(0, 116, 121, 0.5);
 /*box-shadow:0px 0px 20px #000000, 0px 0px;	*/
 
 }
@@ -38,12 +37,6 @@ box-shadow:0px 0px 40px #00CC00, 0px 0px;
 .sect
 {
 	background-color: #ccc;
-}
-
-.slider
-{
-	width: 60%;
-	margin: auto;
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {

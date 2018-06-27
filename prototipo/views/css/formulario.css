@@ -1,28 +1,28 @@
 *{
 	 box-sizing: border-box;
 }
-body{
-    background: #204862;
+body
+{
 	margin: 0px;
 	padding: 0px;  
-	font-family: 'Abel', sans-serif;
-	    
-    
+	font-family: 'Abel', sans-serif;    
 }
-main {
+
+main 
+{
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 150px;
-
 }
-.content-form {
-    
-       background-image: linear-gradient(
-       	200deg, 
-       	rgba(29, 195, 183) 30%, 
-       	rgba(0, 0, 0, 0.85) 99%);
+
+.content-form
+{
+    background-image: linear-gradient(
+    200deg, 
+    rgba(29, 195, 183) 30%, 
+    rgba(0, 0, 0, 0.85) 99%);
     color: #fff;
     margin-top: 0;
     overflow: auto;

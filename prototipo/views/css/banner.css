@@ -24,14 +24,22 @@
 	box-shadow: rgba(0,0,0,.4) 0px 0px 20px;
 	text-shadow: rgba(0,0,0,.5) 0px 0px 10px;
 	align-content:center;
-	align-items: center;
+	align-items:center;
 	transition: all 3000ms;
 	
 }
 
-.header:hover{
-background-color: white;
+/*.header:hover{
+background-color: #ccc;
 color: blue;
+
+}*/
+
+.contcolor{
+background-color:grey;
+max-width: 400px;
+
+
 
 }
 .animacion-izquierda{
