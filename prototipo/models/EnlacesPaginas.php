@@ -3,10 +3,11 @@
 /**
 * 
 */
-class EnlacesPaginas
+class Enlaces
 {
 	// enlaces
-	public static function enlacesPaginasModel ($enlaces){
+	public static function enlacesPaginasModel ($enlaces)
+	{
 
 		if (
 	        $enlaces=="consultar"||
@@ -14,25 +15,23 @@ class EnlacesPaginas
 	        $enlaces=="servicios"||
 	        $enlaces=="registro"||
 	        $enlaces=="restablecer"||
-	        $enlaces=="consultar2") {
+	        $enlaces=="restablecer_contrasena"
+	        )
+		{
 
 			$modulo =  "views/modulos/".$enlaces.".php";
 			
 		}
-		else if($enlaces=="index"||$enlaces=="ok"){
-
+		
+		else if($enlaces=="index"||$enlaces=="ok")
+		{
 			$modulo =  "views/modulos/slider.php";
-
-
 		}
 
 
-
-		else {
-
+		else 
+		{
 			$modulo =  "views/modulos/slider.php";
-
-
 		}
 
 		return $modulo;
