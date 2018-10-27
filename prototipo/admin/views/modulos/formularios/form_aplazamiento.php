@@ -6,70 +6,71 @@
 		<h2 class="sub-title">Formato de Aplazamiento Sena</h2>
 		<?php
 		$registro = new RegistrarNovedad();
-		$registro -> aplazamientoController();
+		$registro -> aplazamientoCambioJornadaRetiroController();
 		?>
 
 		<form method="POST" id="registrar-form" >
-		  
+		   <input type="hidden" name="id" value="1">
 			<div class="form-group width-12">
-				 <div class="width-6">
-				  <input type="text" placeholder="Nombres del Aprendiz *" class="form-control" name="nom_aplazamiento" id="nombre" required/> 
-				 </div> 
-				 <div class="width-6">
-				  <input type="text" placeholder="Apellidos del Aprendiz *" class="form-control" name="apellidos" id="apellidos" required/> 
-				 </div>  
-				 <div class="width-6">
-				  <select name="tdocumento" id="td"  >
-      <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
-      <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
-      <option value="Cédula de Extranjeria">Cédula de Extranjeria</option>   
-                   </select> 
 
+				<div class="width-6">
+				  <input type="text" placeholder="Primer nombre del Aprendiz *" class="form-control" name="nom1_form2" id="nombre1" required/> 
+				 </div>
 
+				  <div class="width-6">
+				  <input type="text" placeholder="segundo nombre del Aprendiz *" class="form-control" name="nom2_form2" id="nombre2" required/> 
+				  </div>  
+
+				 <div class="width-6">
+				  <input type="text" placeholder="Primer apellido del Aprendiz *" class="form-control" name="apellido1" id="apellido1" required/> 
+				 </div>
+
+				 <div class="width-6">
+				  <input type="text" placeholder="Segundo apellido del Aprendiz *" class="form-control" name="apellido2" id="apellido2" required/> 
+				 </div>
+				 
+				 <div class="width-6">
+				  <select name="tdocumento" id="td">
+				      <option value="1">Cédula de Ciudadanía</option>
+				      <option value="2">Tarjeta de Identidad</option>
+				      <option value="3">Cédula de Extranjeria</option>   
+				  </select> 
 				 </div> 
 
 				 <div class="width-6">
 				  <input type="text" placeholder="Numero de Documento *" class="form-control" name="documento" id="documento" minlength="8" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required /> 
 				 </div> 
+				 
 				 <div class="width-6">
 				  <input type="text" placeholder="Grupo" class="form-control" name="grupo" id="grupo" /> 
 				 </div> 
+				 
 				 <div class="width-6">
-				  <input type="text" placeholder="Numero de Ficha " class="form-control" name="ficha" id="ficha" onkeypress='return event.charCode >= 48 && event.charCode <= 57' /> 
+				  <select name="ficha" id="ficha">
+				  <option disabled selected>selecionar</option>
+				      <?php
+				      $ficha = new RegistrarNovedad();
+				      $ficha -> llamarFichaController();
+				      ?>
+
+				  </select>  
 				 </div>  
 
-				 <div class="width-6">
-				  <select name="trimestre" id="td"  >
-	  <option >Trimestre</option>
-      <option value="1">Primero</option>
-      <option value="2">Segundo</option>
-      <option value="3">Tercero</option>  
-      <option value="4">Cuarto</option>
-      <option value="5">Quinto</option>
-      <option value="6">Sexto</option>
-      <option value="7">Septimo</option>
-      
-                   </select>  
+				 <div class="width-6" >
+				  <input class="form-control" name="trimestre" disabled id="trimestreInput" placeholder="Trimestre"> 
 				 </div> 
+				 
 				 <div class="width-6">
-				  <select name="jornada" id="td"  >
-	  <option >Jornada</option>
-      <option value="diurna">Diurna</option>
-      <option value="nocturna">Noctuna</option>
-      <option value="Fines de semana">Fines de semana</option>
-      
-                   </select>  
-				 </div>  
-
-			</div>
+				   <input class="form-control" name="jornada" disabled id="jornadainput" placeholder="jornada">	  
+				 </div> 
+				</div>
 
 			<div class="form-group">
 				 <div class="width-12">
+				 	
 Programa de formacion<br>
-<?php
-include('views/modulos/programas.php');
-?>
-
+<input class="form-control" name="programa" disabled id="programainput">	  
+					 
 				 </div>
 			</div>
 
@@ -78,13 +79,13 @@ include('views/modulos/programas.php');
 				  <h3 class="sub-form">Sede</h3>
 				  
 				  <div class="width-4">
-				    <label for="Restrepo"><input type="radio" id="Restrepo" name="sede" value="Restrepo"/>Restrepo</label>
+				    <label for="Restrepo" ><input disabled type="radio" id="Restrepo" name="sede" value="4" />Restrepo</label>
 				  </div>
 				  <div class="width-4">
-				    <label for="Ricaurte"><input type="radio" id="Ricaurte" name="sede" value="Ricaurte" />Ricaurte</label>
+				    <label for="Ricaurte" ><input disabled type="radio" id="Ricaurte" name="sede" value="5" />Ricaurte</label>
 				  </div>
 				  <div class="width-4">
-				    <label for="Colombia"><input type="radio" id="Colombia" name="sede" value="Colombia" />Colombia</label>
+				    <label for="Colombia" ><input disabled type="radio" id="Colombia" name="sede" value="2" />Colombia</label>
 				  </div>
 			 </div>
 			  
@@ -92,10 +93,10 @@ include('views/modulos/programas.php');
 				  
 				  
 				  <div class="width-4">
-				    <label for="Alamos" ><input type="radio" id="Alamos" name="sede" value="Alamos"/>Alamos</label>
+				    <label for="Alamos" ><input disabled type="radio" id="Alamos" name="sede" value="1"/>Alamos</label>
 				  </div>
 				  <div class="width-4">
-				    <label for="Complejo Sur"><input type="radio" id="Complejo Sur" name="sede" value="Complejo Sur" />Complejo Sur</label>
+				    <label for="Complejo Sur"><input disabled type="radio" id="Complejo Sur" name="sede" value="3" />Complejo Sur</label>
 				  </div>
 			 
 			 </div>

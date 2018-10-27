@@ -2,230 +2,195 @@
 require_once "conexion.php";
 class RegistroNovedades extends Conexion
 {
-    
-   #llamada de programas tecnicos
-   #--------------------------------------
+    #llamada ficha
+    #----------------------------------------------
+    public static function llamarFichaModel($ficha, $trimestre, $sede, $modalidad, $programa, $jornada)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $ficha INNER JOIN $sede ON $ficha.id_sede=$sede.id_sede INNER JOIN $jornada ON $ficha.id_jornada=$jornada.id_jornada INNER JOIN $modalidad ON $ficha.id_modalidad=$modalidad.id_modalidad INNER JOIN $programa ON $ficha.id_programa=$programa.id INNER JOIN $trimestre ON $ficha.id_trimestre=$trimestre.id_trimestre");
+        $stmt->execute();
+        return $stmt->fetchAll();
 
-	public static function tecnicosModel($tabla)
-	{   
-		$stmt = Conexion::conectar()-> prepare("select * from $tabla" );
-		$stmt -> execute();
-		return $stmt -> fetchAll();
-		$stmt -> close();
-	}
+        //SELECT * FROM ficha INNER JOIN sede ON ficha.id_sede=sede.id_sede INNER JOIN jornada ON ficha.id_jornada=jornada.id_jornada INNER JOIN modalidad ON ficha.id_modalidad=modalidad.id_modalidad INNER JOIN programa ON ficha.id_programa=programa.id INNER JOIN trimestre ON ficha.id_trimestre=trimestre.id_trimestre
+    }
 
-   #llamada de programas tecnologicos
-   #--------------------------------------
-	public static function tecnologosModel($tabla)
-	{
+     public static function buscarFichaAjaxModel($ficha, $trimestre, $sede, $modalidad, $programa, $jornada,$bficha)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $ficha INNER JOIN $sede ON $ficha.id_sede=$sede.id_sede INNER JOIN $jornada ON $ficha.id_jornada=$jornada.id_jornada INNER JOIN $modalidad ON $ficha.id_modalidad=$modalidad.id_modalidad INNER JOIN $programa ON $ficha.id_programa=$programa.id INNER JOIN $trimestre ON $ficha.id_trimestre=$trimestre.id_trimestre WHERE codigo_ficha =:bficha");
 
-		$stmt = Conexion::conectar()-> prepare("select * from $tabla" );
-		$stmt -> execute();
-		return $stmt -> fetchAll();
-		$stmt -> close();
+        $stmt->bindparam(":bficha", $bficha);
+        $stmt->execute();
+        return $stmt->fetch();
+
+        //SELECT * FROM ficha INNER JOIN sede ON ficha.id_sede=sede.id_sede INNER JOIN jornada ON ficha.id_jornada=jornada.id_jornada INNER JOIN modalidad ON ficha.id_modalidad=modalidad.id_modalidad INNER JOIN programa ON ficha.id_programa=programa.id INNER JOIN trimestre ON ficha.id_trimestre=trimestre.id_trimestre
+    }
+
+    #llamada de programas
+    #--------------------------------------
+    public static function programasModels($tabla1, $tabla2)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla1 INNER JOIN $tabla2 ON $tabla1.id_tipo_programa=$tabla2.id_programa");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    #------------------------------------------------------------------------------------------------------------------------------
+    public static function validarFichaModels($tabla, $ficha)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT codigo_ficha FROM $tabla WHERE codigo_ficha=:ficha ");
+        $stmt->bindparam(":ficha", $ficha);
+        $stmt->execute();
+        return $stmt->fetch();
+
+    }
+    #registro ficha
+    #--------------------------------------
+    public static function fichaModels($tabla, $datos)
+    {
+        $stmt = Conexion::conectar()->prepare("INSERT INTO ficha(codigo_ficha, id_sede, id_jornada, id_modalidad, id_programa, id_trimestre) VALUES (:ficha, :sede,:jornada,:modalidad, :programa, :trimestre)");
+
+        $stmt->bindparam(":ficha", $datos["ficha"]);
+        $stmt->bindparam(":sede", $datos["sede"]);
+        $stmt->bindparam(":jornada", $datos["jornada"]);
+        $stmt->bindparam(":modalidad", $datos["modalidad"]);
+        $stmt->bindparam(":programa", $datos["programa"]);
+        $stmt->bindparam(":trimestre", $datos["trimestre"]);
+
+        if ($stmt->execute()) {
+            return "exito";
+        } else {
+            return "false";
+        }
+    }
+
+    public static function actualizarFichaModel($datos){
+
+        $stmt = Conexion::conectar()->prepare("UPDATE ficha SET id_sede = :sede, id_jornada = :jornada, id_trimestre = :trimestre WHERE ficha.codigo_ficha = :ficha");
+
+       
+        $stmt->bindparam(":sede", $datos["sede"]);
+        $stmt->bindparam(":jornada", $datos["jornada"]);        
+        $stmt->bindparam(":trimestre", $datos["trimestre"]);
+        $stmt->bindparam(":ficha", $datos["ficha"]);
+
+         if ($stmt->execute()) {
+            return "exito";
+        } else {
+            return "false";
+        }
 
 
-	}
-   
-   #llamada de programas especializaciones
-   #--------------------------------------
-	public static function especializacionModel($tabla)
-	{
+    }
 
-		$stmt = Conexion::conectar()-> prepare("select * from $tabla" );
-		$stmt -> execute();
-		return $stmt -> fetchAll();
-		$stmt -> close();
-	}
+    #------------------------------------------------------------------------------------------------------------------------------
 
-  #------------------------------------------------------------------------------------------------------------------------------
-    
-    #Registro del reingreso
-	#--------------------------------------	
-	public static function reingresoModels($datos,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("insert into $tabla values (:nombre,:apellido,:tdocumento,:documento,:grupo,:ficha,:trimestre,:jornada,:programa,:sede,:fecha)");
-		
-		$stmt -> bindparam(":nombre",		$datos["nombre"]);
-		$stmt -> bindparam(":apellido",		$datos["apellido"]);
-		$stmt -> bindparam(":tdocumento",	$datos["tdocumento"]);
-		$stmt -> bindparam(":documento",	$datos["documento"]);
-		$stmt -> bindparam(":grupo",		$datos["grupo"]);
-		$stmt -> bindparam(":ficha",		$datos["ficha"]);
-		$stmt -> bindparam(":trimestre",	$datos["trimestre"]);
-		$stmt -> bindparam(":jornada",		$datos["jornada"]);
-		$stmt -> bindparam(":programa",		$datos["programa"]);
-		$stmt -> bindparam(":sede",			$datos["sede"]);
-		$stmt -> bindparam(":fecha",		$datos["fecha"]);
+    #Registro del reingreso y desercion
+    #--------------------------------------
+    public static function reingresoDesercionModels($datos, $usuario, $novedad)
+    {
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $usuario (documento_usuario, tipo_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, contrasena, correo, rol, estado) VALUES (:documento, :tdocumento, :nombre1, :nombre2, :apellido1, :apellido2, 'NULL', 'NULL', :rol, :estado)");
 
-		if ($stmt ->execute()) 
-		{
-			return "exito";
-		}
+        $stmt->bindparam(":nombre1", $datos["nombre1"]);
+        $stmt->bindparam(":nombre2", $datos["nombre2"]);
+        $stmt->bindparam(":apellido1", $datos["apellido1"]);
+        $stmt->bindparam(":apellido2", $datos["apellido2"]);
+        $stmt->bindparam(":tdocumento", $datos["tdocumento"]);
+        $stmt->bindparam(":documento", $datos["documento"]);
+        $stmt->bindparam(":rol", $datos["rol"]);
+        $stmt->bindparam(":estado", $datos["estado"]);
+        $stmt->execute();
 
-		else
-		{
-			return "error";
-		}
-     $stmt -> close();
-	}
+        $stmt1 = Conexion::conectar()->prepare("INSERT INTO $novedad (documento, id_tipo_novedad, grupo, numero_ficha, fecha, centro_actual, centro_traslado, ciudad_actual, ciudad_traslado, motivo) VALUES (:documento, :tipo_novedad, :grupo, :ficha, :fecha, 'NULL', 'NULL', 'NULL', 'NULL', 'NULL')");
 
-	#Registro del cambio de jornada
-	#--------------------------------------
-	public static function cambioJornadaModel($datos,$tabla)
-	{
+        $stmt1->bindparam(":documento", $datos["documento"]);
+        $stmt1->bindparam(":tipo_novedad", $datos["id"]);
+        $stmt1->bindparam(":grupo", $datos["grupo"]);
+        $stmt1->bindparam(":ficha", $datos["ficha"]);
+        $stmt1->bindparam(":fecha", $datos["fecha"]);
 
-		$stmt = Conexion::conectar()-> prepare("insert into $tabla values (:nombre,:apellido,:tdocumento,:documento,:grupo,:ficha,:trimestre,:jornada,:programa,:sede,:fecha,:motivo)");
-		
-		$stmt -> bindparam(":nombre",		$datos["nombre"]);
-		$stmt -> bindparam(":apellido",		$datos["apellido"]);
-		$stmt -> bindparam(":tdocumento",	$datos["tdocumento"]);
-		$stmt -> bindparam(":documento",	$datos["documento"]);
-		$stmt -> bindparam(":grupo",		$datos["grupo"]);
-		$stmt -> bindparam(":ficha",		$datos["ficha"]);
-		$stmt -> bindparam(":trimestre",	$datos["trimestre"]);
-		$stmt -> bindparam(":jornada",		$datos["jornada"]);
-		$stmt -> bindparam(":programa",		$datos["programa"]);
-		$stmt -> bindparam(":sede",			$datos["sede"]);
-		$stmt -> bindparam(":fecha",		$datos["fecha"]);
-		$stmt -> bindparam(":motivo",		$datos["motivo"]);
+        if ($stmt1 -> execute()) {
+            return "exito";
+        } else {
+            return "error";
+        }
+        $stmt->close();
+    }
 
-		if ($stmt ->execute()) 
-		{
-			return "exito";
-		}
+    #Registro del aplazamiento, cambio de jornada y retiro
+    #--------------------------------------
+    public static function aplazamientoCambioJornadaRetiroModel($datos, $usuario, $novedad)
+    {
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $usuario (documento_usuario, tipo_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, contrasena, correo, rol, estado) VALUES (:documento, :tdocumento, :nombre1, :nombre2, :apellido1, :apellido2, 'NULL', 'NULL', :rol, :estado)");
 
-		else
-		{
-			return "error";
-		}
-	}
+        $stmt->bindparam(":nombre1", $datos["nombre1"]);
+        $stmt->bindparam(":nombre2", $datos["nombre2"]);
+        $stmt->bindparam(":apellido1", $datos["apellido1"]);
+        $stmt->bindparam(":apellido2", $datos["apellido2"]);
+        $stmt->bindparam(":tdocumento", $datos["tdocumento"]);
+        $stmt->bindparam(":documento", $datos["documento"]);
+        $stmt->bindparam(":rol", $datos["rol"]);
+        $stmt->bindparam(":estado", $datos["estado"]);
+        $stmt->execute();
 
-	#Registro traslado
-	#--------------------------------------
-	public static function trasladoModel($datos,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("insert into $tabla values (:nombre,:apellido,:tdocumento,:documento,:grupo,:ficha,:trimestre,:jornada,:centroa,:centron,:ciudada,:ciudadn,:programa,:fecha,:motivo)");
-		
-		$stmt -> bindparam(":nombre",		$datos["nombre"]);
-		$stmt -> bindparam(":apellido",		$datos["apellido"]);
-		$stmt -> bindparam(":tdocumento",	$datos["tdocumento"]);
-		$stmt -> bindparam(":documento",	$datos["documento"]);
-		$stmt -> bindparam(":grupo",		$datos["grupo"]);
-		$stmt -> bindparam(":ficha",		$datos["ficha"]);
-		$stmt -> bindparam(":trimestre",	$datos["trimestre"]);
-		$stmt -> bindparam(":jornada",		$datos["jornada"]);
-		$stmt -> bindparam(":centroa",		$datos["centroa"]);
-		$stmt -> bindparam(":centron",		$datos["centron"]);
-		$stmt -> bindparam(":ciudada",		$datos["ciudada"]);
-		$stmt -> bindparam(":ciudadn",		$datos["ciudadn"]);
-		$stmt -> bindparam(":programa",		$datos["programa"]);
-		$stmt -> bindparam(":fecha",		$datos["fecha"]);
-		$stmt -> bindparam(":motivo",		$datos["motivo"]);
+         $stmt1 = Conexion::conectar()->prepare("INSERT INTO $novedad (documento, id_tipo_novedad, grupo, numero_ficha, fecha, centro_actual, centro_traslado, ciudad_actual, ciudad_traslado, motivo) VALUES (:documento, :tipo_novedad, :grupo, :ficha, :fecha, 'NULL', 'NULL', 'NULL', 'NULL', :motivo)");
 
-		if ($stmt ->execute()) 
-		{
-			return "exito";
-		}
+        $stmt1->bindparam(":documento", $datos["documento"]);
+        $stmt1->bindparam(":tipo_novedad", $datos["id"]);
+        $stmt1->bindparam(":grupo", $datos["grupo"]);
+        $stmt1->bindparam(":ficha", $datos["ficha"]);
+        $stmt1->bindparam(":fecha", $datos["fecha"]);
+        $stmt1->bindparam(":motivo",$datos["motivo"]);
 
-		else
-		{
-			return "error";
-		}
-	}
+        if ($stmt1 -> execute()) 
+        {
+            return "exito";
+        } 
 
-	#Registro retiro
-	#--------------------------------------
-	public static function retiroModel($datos,$tabla)
-	{
+        else 
+        {
+            return "error";
+        }
+    }
 
-		$stmt = Conexion::conectar()-> prepare("insert into $tabla values (:nombre,:apellido,:tdocumento,:documento,:grupo,:ficha,:trimestre,:jornada,:programa,:sede,:fecha,:motivo)");
-		
-		$stmt -> bindparam(":nombre",		$datos["nombre"]);
-		$stmt -> bindparam(":apellido",		$datos["apellido"]);
-		$stmt -> bindparam(":tdocumento",	$datos["tdocumento"]);
-		$stmt -> bindparam(":documento",	$datos["documento"]);
-		$stmt -> bindparam(":grupo",		$datos["grupo"]);
-		$stmt -> bindparam(":ficha",		$datos["ficha"]);
-		$stmt -> bindparam(":trimestre",	$datos["trimestre"]);
-		$stmt -> bindparam(":jornada",		$datos["jornada"]);
-		$stmt -> bindparam(":programa",		$datos["programa"]);
-		$stmt -> bindparam(":sede",			$datos["sede"]);
-		$stmt -> bindparam(":fecha",		$datos["fecha"]);
-		$stmt -> bindparam(":motivo",		$datos["motivo"]);
+    #Registro traslado
+    #--------------------------------------
+    public static function trasladoModel($datos, $usuario, $novedad)
+    {
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $usuario (documento_usuario, tipo_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, contrasena, correo, rol, estado) VALUES (:documento, :tdocumento, :nombre1, :nombre2, :apellido1, :apellido2, 'NULL', 'NULL', :rol, :estado)");
 
-		if ($stmt ->execute()) 
-		{
-			return "exito";
-		}
+        $stmt->bindparam(":nombre1", $datos["nombre1"]);
+        $stmt->bindparam(":nombre2", $datos["nombre2"]);
+        $stmt->bindparam(":apellido1", $datos["apellido1"]);
+        $stmt->bindparam(":apellido2", $datos["apellido2"]);
+        $stmt->bindparam(":tdocumento", $datos["tdocumento"]);
+        $stmt->bindparam(":documento", $datos["documento"]);
+        $stmt->bindparam(":rol", $datos["rol"]);
+        $stmt->bindparam(":estado", $datos["estado"]);
+        $stmt->execute();
 
-		else
-		{
-			return "error";
-		}
-	}
+        $stmt1 = Conexion::conectar()->prepare("INSERT INTO $novedad (documento, id_tipo_novedad, grupo, numero_ficha, fecha, centro_actual, centro_traslado, ciudad_actual, ciudad_traslado, motivo) VALUES (:documento, :tipo_novedad, :grupo, :ficha, :fecha, :centroa, :centrot, :ciudada, :ciudadt, :motivo)");
 
-	#Registro aplazamiento
-	#--------------------------------------
-	public static function aplazamientoModel($datos,$tabla)
-	{
+        $stmt1->bindparam(":documento",         $datos["documento"]);
+        $stmt1->bindparam(":tipo_novedad",      $datos["id"]);
+        $stmt1->bindparam(":grupo",             $datos["grupo"]);
+        $stmt1->bindparam(":ficha",             $datos["ficha"]);
+        $stmt1->bindparam(":fecha",             $datos["fecha"]);
+        $stmt1->bindparam(":centroa",           $datos["centroa"]);
+        $stmt1->bindparam(":centrot",           $datos["centrot"]);
+        $stmt1->bindparam(":ciudada",           $datos["ciudada"]);
+        $stmt1->bindparam(":ciudadt",           $datos["ciudadt"]);
+        $stmt1->bindparam(":motivo",            $datos["motivo"]);       
 
-		$stmt = Conexion::conectar()-> prepare("insert into $tabla values (:nombre,:apellido,:tdocumento,:documento,:grupo,:ficha,:trimestre,:jornada,:programa,:sede,:fecha,:motivo)");
-		
-		$stmt -> bindparam(":nombre",		$datos["nombre"]);
-		$stmt -> bindparam(":apellido",		$datos["apellido"]);
-		$stmt -> bindparam(":tdocumento",	$datos["tdocumento"]);
-		$stmt -> bindparam(":documento",	$datos["documento"]);
-		$stmt -> bindparam(":grupo",		$datos["grupo"]);
-		$stmt -> bindparam(":ficha",		$datos["ficha"]);
-		$stmt -> bindparam(":trimestre",	$datos["trimestre"]);
-		$stmt -> bindparam(":jornada",		$datos["jornada"]);
-		$stmt -> bindparam(":programa",		$datos["programa"]);
-		$stmt -> bindparam(":sede",			$datos["sede"]);
-		$stmt -> bindparam(":fecha",		$datos["fecha"]);
-		$stmt -> bindparam(":motivo",		$datos["motivo"]);
+        if ($stmt1 -> execute()) 
+        {
+            return "exito";
+        } 
 
-		if ($stmt ->execute()) 
-		{
-			return "exito";
-		}
-
-		else
-		{
-			return "error";
-		}
-	}
-
-	#Registro desercion
-	#--------------------------------------
-	public static function desercionModel($datos,$tabla)
-	{
-
-		$stmt = Conexion::conectar()-> prepare("insert into $tabla values (:nombre,:apellido,:tdocumento,:documento,:grupo,:ficha,:trimestre,:jornada,:programa,:sede,:fecha)");
-		
-		$stmt -> bindparam(":nombre",		$datos["nombre"]);
-		$stmt -> bindparam(":apellido",		$datos["apellido"]);
-		$stmt -> bindparam(":tdocumento",	$datos["tdocumento"]);
-		$stmt -> bindparam(":documento",	$datos["documento"]);
-		$stmt -> bindparam(":grupo",		$datos["grupo"]);
-		$stmt -> bindparam(":ficha",		$datos["ficha"]);
-		$stmt -> bindparam(":trimestre",	$datos["trimestre"]);
-		$stmt -> bindparam(":jornada",		$datos["jornada"]);
-		$stmt -> bindparam(":programa",		$datos["programa"]);
-		$stmt -> bindparam(":sede",			$datos["sede"]);
-		$stmt -> bindparam(":fecha",		$datos["fecha"]);
-
-		if ($stmt ->execute()) 
-		{
-			return "exito";
-		}
-
-		else
-		{
-			return "error";
-		}
-	}
-
+        else 
+        {
+            return "error";
+        }
+    }
 }
 
-?>
+
+ 

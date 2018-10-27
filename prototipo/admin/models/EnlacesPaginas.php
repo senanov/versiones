@@ -6,24 +6,20 @@ class EnlacesPaginas
 		#carpeta formularios
         #-----------------------------------
 		if($enlaces == "form_reingreso" || $enlaces == "form_cam_jor" || $enlaces == "form_traslado"
-			|| $enlaces == "form_retiro"|| $enlaces == "form_aplazamiento" || $enlaces == "form_desercion")
+			|| $enlaces == "form_retiro"|| $enlaces == "form_aplazamiento" || $enlaces == "form_desercion" || $enlaces == "form_fichas")
 		{
 			$modulo="views/modulos/formularios/" . $enlaces . ".php"; 
 		}
         
         #carpeta consultas
         #-----------------------------------
-		elseif($enlaces == "aplazamiento" || $enlaces == "desercion" || $enlaces == "cambio_jornada"
-			|| $enlaces == "traslado" || $enlaces == "retiro" || $enlaces == "reingreso"||$enlaces == "consultaGeneral"|| $enlaces == "consultaUsuarios"|| $enlaces == "programas" || $enlaces == "tablaProgramas"||$enlaces == "perfil") 
+		elseif($enlaces == "consulta_novedades" ||$enlaces == "consultaGeneral"|| $enlaces == "consultaUsuarios"|| $enlaces == "programas" || $enlaces == "tablaProgramas"|| $enlaces == "tablaFichas" || $enlaces == "perfil") 
 		{
 			$modulo="views/modulos/consultas/" . $enlaces . ".php"; 
 		}
         #carpeta editar
         #-----------------------------------
-		elseif($enlaces == "edReingreso"||$enlaces == "edCambio_jornada"||
-	           $enlaces == "edTraslado"||$enlaces == "edRetiro"||
-	           $enlaces == "edAplazamiento"||$enlaces == "edDesercion"||
-	           $enlaces == "edUsuarios" ||$enlaces == "edPrograma"||$enlaces == "edPerfil") 
+		elseif($enlaces == "edNovedades" || $enlaces == "edUsuarios" ||$enlaces == "edPrograma" || $enlaces == "edFicha" ||$enlaces == "edPerfil") 
 		{
 			$modulo="views/modulos/editar/" . $enlaces . ".php"; 
 		}

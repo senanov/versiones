@@ -10,9 +10,9 @@
   <div class="col" id="columna1">
  <form method="post">
  <center><select name="tprograma" class="programa">
-   <option value="programas_tecnicos">Programa Técnico</option>
-   <option value="programas_tecnologicos">Programa Tecnológico</option>
-   <option value="especializaciones">Especializaciones</option>
+   <option value="1">Programa Técnico</option>
+   <option value="2">Programa Tecnológico</option>
+   <option value="3">Especializaciones</option>
  </select><br><br>
  <input type="text" name="programa" placeholder="Agregar programa de formacion" class="programa" required><br><br>
 <input type="submit" name="enviar" value="Agregar" class="bt1">

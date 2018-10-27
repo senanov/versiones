@@ -3,79 +3,14 @@ require_once "conexion.php";
 
 class CrudNovedades extends Conexion
 {
-	#Consulta reingreso
+	#Consulta reingreso y desercion
 	#----------------------------------------------
-	public static function consultarReingresoModel($documento,$tabla)
+	public static function consultarNovedadesModel($documento,$usuario,$novedad,$tipo_documento)
 	{
-		$stmt = Conexion::conectar()-> prepare("select * from $tabla where numero_documento = :doc");
+		$stmt = Conexion::conectar()-> prepare("SELECT * FROM $usuario INNER JOIN $novedad ON $usuario.documento_usuario=novedad.documento INNER JOIN tipo_documento ON usuario.tipo_documento=tipo_documento.id_tipo INNER JOIN ficha ON novedad.numero_ficha=ficha.codigo_ficha INNER JOIN jornada ON ficha.id_jornada=jornada.id_jornada INNER JOIN trimestre ON ficha.id_trimestre=trimestre.id_trimestre INNER JOIN sede ON ficha.id_sede=sede.id_sede INNER JOIN programa ON ficha.id_programa=programa.id INNER JOIN tipo_novedad ON novedad.id_tipo_novedad=tipo_novedad.id_novedad  WHERE documento = :doc");
 
-		$stmt -> bindparam(":doc",$documento, PDO::PARAM_STR);
+		$stmt -> bindparam(":doc",	$documento, PDO::PARAM_STR);
 		$stmt -> execute();
-		return $stmt -> fetch();
-
-		$stmt -> close();	
-	}
-
-	#Consulta cambio de jornada
-	#----------------------------------------------
-	public static function consultarCambioModel($documento,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("select * from $tabla where numero_documento = :doc");
-		
-		$stmt -> bindparam(":doc",$documento,PDO::PARAM_STR);
-		$stmt -> EXECUTE();
-		return $stmt -> fetch();
-
-		$stmt -> close();
-	}
-
-	#Consulta traslado
-	#----------------------------------------------
-	public static function consultarTrasladoModel($documento,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("select * from $tabla where numero_documento = :doc");
-		
-		$stmt -> bindparam(":doc",$documento,PDO::PARAM_STR);
-		$stmt -> EXECUTE();
-		return $stmt -> fetch();
-
-		$stmt -> close();
-	}
-
-	#Consulta retiros
-	#----------------------------------------------
-	public static function consultarRetiroModel($documento,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("select * from $tabla where numero_documento = :doc");
-		
-		$stmt -> bindparam(":doc",$documento,PDO::PARAM_STR);
-		$stmt -> EXECUTE();
-		return $stmt -> fetch();
-
-		$stmt -> close();
-	}
-
-	#Consulta aplazamiento
-	#----------------------------------------------
-	public static function consultarAplazamientoModel($documento,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("select * from $tabla where numero_documento = :doc");
-		
-		$stmt -> bindparam(":doc",$documento,PDO::PARAM_STR);
-		$stmt -> EXECUTE();
-		return $stmt -> fetch();
-
-		$stmt -> close();
-	}
-
-	#Consulta desercion
-	#----------------------------------------------
-	public static function consultarDesercionModel($documento,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("select * from $tabla where numero_documento = :doc");
-		
-		$stmt -> bindparam(":doc",$documento,PDO::PARAM_STR);
-		$stmt -> EXECUTE();
 		return $stmt -> fetch();
 
 		$stmt -> close();
@@ -84,117 +19,14 @@ class CrudNovedades extends Conexion
 	#ELIMINAR UN REGISTRO
 	#==========================================================================================================
     
-    #Eliminar reingreso
+    #Eliminar registros de las novedades
 	#----------------------------------------------
-	public static function eliminarReingresoModel($id,$tabla)
+	public static function eliminarNovedadesModel($id,$novedad,$usuario)
 	{
-		$stmt = Conexion::conectar()-> prepare("delete from $tabla where $tabla. numero_documento = :id");
+		$stmt = Conexion::conectar()-> prepare("DELETE $novedad, $usuario FROM novedad INNER JOIN usuario WHERE novedad.documento=usuario.documento_usuario AND novedad.documento LIKE :id");
+
 		$stmt -> bindparam(":id",$id,PDO::PARAM_STR);
-		
-		if($stmt -> execute())
-		{
-		return "exito";
-		}
 
-		else
-		{
-			return "error";
-		}
-
-		$stmt -> close();
-	}
-
-
-	#Eliminar Cambio Jornada
-	#----------------------------------------------
-	public static function eliminarCambioJornadaModel($id,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("delete from $tabla where $tabla. numero_documento = :id");
-		$stmt -> bindparam(":id",$id,PDO::PARAM_STR);
-		
-		if($stmt -> execute())
-		{
-		return "exito";
-		}
-
-		else
-		{
-			return "error";
-		}
-
-		$stmt -> close();
-	}
-
-
-	#Eliminar traslado
-	#----------------------------------------------
-	public static function eliminarTrasladoModel($id,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("delete from $tabla where $tabla. numero_documento = :id");
-		$stmt -> bindparam(":id",$id,PDO::PARAM_STR);
-		
-		if($stmt -> execute())
-		{
-		return "exito";
-		}
-
-		else
-		{
-			return "error";
-		}
-
-		$stmt -> close();
-	}
-
-    #Eliminar retiro
-	#----------------------------------------------
-	public static function eliminarRetiroModel($id,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("delete from $tabla where $tabla. numero_documento = :id");
-		$stmt -> bindparam(":id",$id,PDO::PARAM_STR);
-		
-		if($stmt -> execute())
-		{
-		return "exito";
-		}
-
-		else
-		{
-			return "error";
-		}
-
-		$stmt -> close();
-	}
-
-
-	#Eliminar Aplazamiento
-	#----------------------------------------------
-	public static function eliminarAplazamientoModel($id,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("delete from $tabla where $tabla. numero_documento = :id");
-		$stmt -> bindparam(":id",$id,PDO::PARAM_STR);
-		
-		if($stmt -> execute())
-		{
-		return "exito";
-		}
-
-		else
-		{
-			return "error";
-		}
-
-		$stmt -> close();
-	}
-
-
-	#Eliminar Desercion
-	#----------------------------------------------
-	public static function eliminarDesercionModel($id,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("delete from $tabla where $tabla. numero_documento = :id");
-		$stmt -> bindparam(":id",$id,PDO::PARAM_STR);
-		
 		if($stmt -> execute())
 		{
 		return "exito";
@@ -208,31 +40,27 @@ class CrudNovedades extends Conexion
 		$stmt -> close();
 	}
      
-    #actualizar datos reingreso
+    #actualizar datos de las novedades
     #--------------------------------------------------
-	public static function actualizarReingresoModel($datos,$tabla)
+	public static function actualizarNovedadModel($datos,$tabla)
 	{
-		$stmt = Conexion::conectar()-> prepare("UPDATE $tabla SET nombre = :nombres, apellidos = :apellidos, documento = :tdocumento, numero_documento = :ndocumento, grupo = :grupo, numero_ficha = :ficha, trimestre = :trimestre, jornada = :jornada, programa_formacion = :programa, sede = :sede, fecha = :fecha WHERE f_reingreso.numero_documento = :id");
+		$stmt = Conexion::conectar()-> prepare("UPDATE $tabla INNER JOIN usuario ON novedad.documento=usuario.documento_usuario SET usuario.primer_nombre=:nombre1, usuario.segundo_nombre=:nombre2, usuario.primer_apellido=:apellido1, usuario.segundo_apellido=:apellido2, usuario.tipo_documento=:tdocumento, novedad.grupo=:grupo  WHERE novedad.documento = :id");
 
-		 
-
-		$stmt -> bindparam(":nombres",		$datos["nombres"],PDO::PARAM_STR);
-		$stmt -> bindparam(":apellidos",	$datos["apellidos"],PDO::PARAM_STR);
+		$stmt -> bindparam(":nombre1",		$datos["nombre1"],PDO::PARAM_STR);
+		$stmt -> bindparam(":nombre2",		$datos["nombre2"],PDO::PARAM_STR);
+		$stmt -> bindparam(":apellido1",	$datos["apellido1"],PDO::PARAM_STR);
+		$stmt -> bindparam(":apellido2",	$datos["apellido2"],PDO::PARAM_STR);
 		$stmt -> bindparam(":tdocumento",	$datos["tdocumento"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ndocumento",	$datos["ndocumento"],PDO::PARAM_STR);
 		$stmt -> bindparam(":grupo",		$datos["grupo"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ficha",		$datos["ficha"],PDO::PARAM_STR);
-		$stmt -> bindparam(":trimestre",	$datos["trimestre"],PDO::PARAM_STR);
-		$stmt -> bindparam(":jornada",		$datos["jornada"],PDO::PARAM_STR);
-		$stmt -> bindparam(":programa",		$datos["programa"],PDO::PARAM_STR);
-		$stmt -> bindparam(":sede",			$datos["sede"],PDO::PARAM_STR);
-		$stmt -> bindparam(":fecha",		$datos["fecha"],PDO::PARAM_STR);
-		$stmt -> bindparam(":id",		    $datos["id"],PDO::PARAM_STR);
+		$stmt -> bindparam(":id",			$datos["id"],PDO::PARAM_STR);
 
-		if($stmt -> execute()) {
+		if($stmt -> execute())
+		{
 			return "exito";
-		}else{
+		}
 
+		else
+		{
 			return "error";
 		}
 		
@@ -240,182 +68,12 @@ class CrudNovedades extends Conexion
 		$stmt -> close();
 	}
 
-	#actualizar datos Cambio De Jornada
-    #--------------------------------------------------
-	public static function actualizarCambioJornadaModel($datos,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("UPDATE $tabla SET nombre = :nombres, apellidos = :apellidos, documento = :tdocumento, numero_documento = :ndocumento, grupo = :grupo, numero_ficha = :ficha, trimestre = :trimestre, jornada = :jornada, programa_formacion = :programa, sede = :sede, fecha = :fecha, motivo = :motivo WHERE $tabla.numero_documento = :id");
-
-		 
-
-		$stmt -> bindparam(":nombres",		$datos["nombres"],PDO::PARAM_STR);
-		$stmt -> bindparam(":apellidos",	$datos["apellidos"],PDO::PARAM_STR);
-		$stmt -> bindparam(":tdocumento",	$datos["tdocumento"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ndocumento",	$datos["ndocumento"],PDO::PARAM_STR);
-		$stmt -> bindparam(":grupo",		$datos["grupo"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ficha",		$datos["ficha"],PDO::PARAM_STR);
-		$stmt -> bindparam(":trimestre",	$datos["trimestre"],PDO::PARAM_STR);
-		$stmt -> bindparam(":jornada",		$datos["jornada"],PDO::PARAM_STR);
-		$stmt -> bindparam(":programa",		$datos["programa"],PDO::PARAM_STR);
-		$stmt -> bindparam(":sede",			$datos["sede"],PDO::PARAM_STR);
-		$stmt -> bindparam(":fecha",		$datos["fecha"],PDO::PARAM_STR);
-		$stmt -> bindparam(":motivo",		$datos["motivo"],PDO::PARAM_STR);
-		$stmt -> bindparam(":id",		    $datos["id"],PDO::PARAM_STR);
-
-		if($stmt -> execute()) {
-			return "exito";
-		}else{
-
-			return "error";
-		}
-		
-		
-		$stmt -> close();
-	}
-
-
-	#actualizar datos Traslado
-    #--------------------------------------------------
-	public static function actualizartrasladoModel($datos,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("UPDATE $tabla SET nombre = :nombres, apellidos = :apellidos, documento = :tdocumento, numero_documento = :ndocumento, grupo = :grupo, numero_ficha = :ficha, trimestre = :trimestre, jornada = :jornada, centro_actual = :centro_actual,centro_traslado = :centro_traslado,ciudad_actual = :ciudad_actual,ciudad_traslado = :ciudad_traslado, programa_formacion = :programa, sede = :sede, fecha = :fecha, motivo = :motivo WHERE $tabla.numero_documento = :id");
-
-		 
-
-		$stmt -> bindparam(":nombres",		$datos["nombres"],PDO::PARAM_STR);
-		$stmt -> bindparam(":apellidos",	$datos["apellidos"],PDO::PARAM_STR);
-		$stmt -> bindparam(":tdocumento",	$datos["tdocumento"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ndocumento",	$datos["ndocumento"],PDO::PARAM_STR);
-		$stmt -> bindparam(":grupo",		$datos["grupo"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ficha",		$datos["ficha"],PDO::PARAM_STR);
-		$stmt -> bindparam(":trimestre",	$datos["trimestre"],PDO::PARAM_STR);
-		$stmt -> bindparam(":jornada",		$datos["jornada"],PDO::PARAM_STR);
-		$stmt -> bindparam(":centro_actual",$datos["centroActual"],PDO::PARAM_STR);
-		$stmt -> bindparam(":centro_traslado",$datos["centroTraslado"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ciudad_actual",$datos["ciudadActual"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ciudad_traslado",$datos["ciudadTraslado"],PDO::PARAM_STR);
-		$stmt -> bindparam(":programa",		$datos["programa"],PDO::PARAM_STR);
-		$stmt -> bindparam(":sede",			$datos["sede"],PDO::PARAM_STR);
-		$stmt -> bindparam(":fecha",		$datos["fecha"],PDO::PARAM_STR);
-		$stmt -> bindparam(":motivo",		$datos["motivo"],PDO::PARAM_STR);
-		$stmt -> bindparam(":id",		    $datos["id"],PDO::PARAM_STR);
-
-		if($stmt -> execute()) {
-			return "exito";
-		}else{
-
-			return "error";
-		}
-		
-		
-		$stmt -> close();
-	}
-
-
-	#actualizar datos Cambio De Retiro
-    #--------------------------------------------------
-	public static function actualizarRetiroModel($datos,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("UPDATE $tabla SET nombre = :nombres, apellidos = :apellidos, documento = :tdocumento, numero_documento = :ndocumento, grupo = :grupo, numero_ficha = :ficha, trimestre = :trimestre, jornada = :jornada, programa_formacion = :programa, sede = :sede, fecha = :fecha, motivo = :motivo WHERE $tabla.numero_documento = :id");
-
-		 
-
-		$stmt -> bindparam(":nombres",		$datos["nombres"],PDO::PARAM_STR);
-		$stmt -> bindparam(":apellidos",	$datos["apellidos"],PDO::PARAM_STR);
-		$stmt -> bindparam(":tdocumento",	$datos["tdocumento"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ndocumento",	$datos["ndocumento"],PDO::PARAM_STR);
-		$stmt -> bindparam(":grupo",		$datos["grupo"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ficha",		$datos["ficha"],PDO::PARAM_STR);
-		$stmt -> bindparam(":trimestre",	$datos["trimestre"],PDO::PARAM_STR);
-		$stmt -> bindparam(":jornada",		$datos["jornada"],PDO::PARAM_STR);
-		$stmt -> bindparam(":programa",		$datos["programa"],PDO::PARAM_STR);
-		$stmt -> bindparam(":sede",			$datos["sede"],PDO::PARAM_STR);
-		$stmt -> bindparam(":fecha",		$datos["fecha"],PDO::PARAM_STR);
-		$stmt -> bindparam(":motivo",		$datos["motivo"],PDO::PARAM_STR);
-		$stmt -> bindparam(":id",		    $datos["id"],PDO::PARAM_STR);
-
-		if($stmt -> execute()) {
-			return "exito";
-		}else{
-
-			return "error";
-		}
-		
-		
-		$stmt -> close();
-	}
-
-
-	#actualizar datos Cambio De Aplazamiento
-    #--------------------------------------------------
-	public static function actualizarAplazamientoModel($datos,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("UPDATE $tabla SET nombre = :nombres, apellidos = :apellidos, documento = :tdocumento, numero_documento = :ndocumento, grupo = :grupo, numero_ficha = :ficha, trimestre = :trimestre, jornada = :jornada, programa_formacion = :programa, sede = :sede, fecha = :fecha, motivo = :motivo WHERE $tabla.numero_documento = :id");
-
-		 
-
-		$stmt -> bindparam(":nombres",		$datos["nombres"],PDO::PARAM_STR);
-		$stmt -> bindparam(":apellidos",	$datos["apellidos"],PDO::PARAM_STR);
-		$stmt -> bindparam(":tdocumento",	$datos["tdocumento"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ndocumento",	$datos["ndocumento"],PDO::PARAM_STR);
-		$stmt -> bindparam(":grupo",		$datos["grupo"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ficha",		$datos["ficha"],PDO::PARAM_STR);
-		$stmt -> bindparam(":trimestre",	$datos["trimestre"],PDO::PARAM_STR);
-		$stmt -> bindparam(":jornada",		$datos["jornada"],PDO::PARAM_STR);
-		$stmt -> bindparam(":programa",		$datos["programa"],PDO::PARAM_STR);
-		$stmt -> bindparam(":sede",			$datos["sede"],PDO::PARAM_STR);
-		$stmt -> bindparam(":fecha",		$datos["fecha"],PDO::PARAM_STR);
-		$stmt -> bindparam(":motivo",		$datos["motivo"],PDO::PARAM_STR);
-		$stmt -> bindparam(":id",		    $datos["id"],PDO::PARAM_STR);
-
-		if($stmt -> execute()) {
-			return "exito";
-		}else{
-
-			return "error";
-		}
-		
-		
-		$stmt -> close();
-	}
-
-
-	#actualizar datos Desercion
-    #--------------------------------------------------
-	public static function actualizarDesercionModel($datos,$tabla)
-	{
-		$stmt = Conexion::conectar()-> prepare("UPDATE $tabla SET nombre = :nombres, apellidos = :apellidos, documento = :tdocumento, numero_documento = :ndocumento, grupo = :grupo, numero_ficha = :ficha, trimestre = :trimestre, jornada = :jornada, programa_formacion = :programa, sede = :sede, fecha = :fecha WHERE $tabla.numero_documento = :id");
-
-		 
-
-		$stmt -> bindparam(":nombres",		$datos["nombres"],PDO::PARAM_STR);
-		$stmt -> bindparam(":apellidos",	$datos["apellidos"],PDO::PARAM_STR);
-		$stmt -> bindparam(":tdocumento",	$datos["tdocumento"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ndocumento",	$datos["ndocumento"],PDO::PARAM_STR);
-		$stmt -> bindparam(":grupo",		$datos["grupo"],PDO::PARAM_STR);
-		$stmt -> bindparam(":ficha",		$datos["ficha"],PDO::PARAM_STR);
-		$stmt -> bindparam(":trimestre",	$datos["trimestre"],PDO::PARAM_STR);
-		$stmt -> bindparam(":jornada",		$datos["jornada"],PDO::PARAM_STR);
-		$stmt -> bindparam(":programa",		$datos["programa"],PDO::PARAM_STR);
-		$stmt -> bindparam(":sede",			$datos["sede"],PDO::PARAM_STR);
-		$stmt -> bindparam(":fecha",		$datos["fecha"],PDO::PARAM_STR);
-		$stmt -> bindparam(":id",		    $datos["id"],PDO::PARAM_STR);
-
-		if($stmt -> execute()) {
-			return "exito";
-		}else{
-
-			return "error";
-		}
-		
-		
-		$stmt -> close();
-	}
-
+	//consulta de usuarios
+	//-------------------------------------
 	public static function consultaUsuariosModel($documento,$tabla)
 	{
-		$stmt = Conexion::conectar()-> prepare("select * from $tabla where documento_usuario = :doc");
-
+		$stmt = Conexion::conectar()-> prepare("SELECT * FROM $tabla INNER JOIN tipo_documento on usuario.tipo_documento=tipo_documento.id_tipo INNER JOIN rol ON usuario.rol=rol.id_rol INNER JOIN estado ON usuario.estado=estado.id_estado WHERE documento_usuario = :doc");
+//SELECT * FROM $tabla INNER JOIN tipo_documento on usuario.tipo_documento=tipo_documento.id_tipo INNER JOIN rol ON usuario.rol=rol.id_rol INNER JOIN estado ON usuario.estado=estado.id_estado WHERE documento_usuario = :doc
 		$stmt -> bindparam(":doc",$documento, PDO::PARAM_STR);
 		$stmt -> execute();
 		return $stmt -> fetch();
@@ -423,70 +81,86 @@ class CrudNovedades extends Conexion
 		$stmt -> close();	
 	}
 
+	//actualizar datos del usuario
+	//--------------------------------------
 	public static function actualizarconsultaUsuariosModel($datos,$tabla)
 	{
-		$stmt = Conexion::conectar()-> prepare("UPDATE $tabla SET documento_usuario  = :ndocumento, tipo_documento = :tdocumento, rol = :rol WHERE $tabla.documento_usuario = :id");
+		$stmt = Conexion::conectar()-> prepare("UPDATE $tabla SET documento_usuario = :ndocumento, tipo_documento = :tdocumento, rol = :rol, estado = :estado WHERE usuario.documento_usuario = :id");
 
-		
 		
 		$stmt -> bindparam(":ndocumento",	$datos["ndocumento"],PDO::PARAM_STR);
 		$stmt -> bindparam(":tdocumento",	$datos["tdocumento"],PDO::PARAM_STR);
 		$stmt -> bindparam(":rol",		    $datos["rol"],PDO::PARAM_STR);
+		$stmt -> bindparam(":estado",		$datos["estado"],PDO::PARAM_STR);
 		$stmt -> bindparam(":id",		    $datos["id"],PDO::PARAM_STR);
 		
-		if($stmt -> execute()) {
+		if($stmt -> execute()) 
+		{
 			return "exito";
-		}else{
+		}
 
+		else
+		{
 			return "error";
 		}
-		
-		
+	
 		$stmt -> close();
 	}
 
-
-	public static function consultarProgramasModel($datos,$tabla,$campo)
+	//validar programas
+	//-----------------------------------
+	public static function consultarProgramasModel($id,$tabla)
 	{
-        $stmt = Conexion::conectar()-> prepare("select * from $tabla where $campo =:programa" );
+		$stmt = Conexion::conectar()-> prepare("SELECT * FROM $tabla INNER JOIN tipo_programa ON programa.id_tipo_programa=tipo_programa.id_programa WHERE id = :id");
+		$stmt -> bindparam(":id",      $id);
+		//$stmt -> bindparam(":programa",   $idPrograma);
+		$stmt -> execute();
+		return $stmt -> fetch();
+	}
 
-        $stmt -> bindparam(":programa", $datos,PDO::PARAM_STR);
+	//tabla de los programas
+	//--------------------------------------
+	public static function tablaProgramasModels($programa,$tipo_programa)
+	{
+        $stmt = Conexion::conectar()-> prepare("SELECT * from $programa INNER JOIN $tipo_programa ON $programa.id_tipo_programa=$tipo_programa.id_programa");
 		$stmt -> execute();
 		return $stmt -> fetchAll();
 
 		$stmt -> close();
-
 	}
 
-
-	public static function insertarProgramasModel($datos,$tabla)
+	//insertar programas de formacion
+	//---------------------------------------
+	public static function insertarProgramasModel($datos,$idPrograma,$tabla)
 	{
 
-		$stmt = Conexion::conectar()-> prepare("insert into $tabla  values (NULL, :datos)");        
+		$stmt = Conexion::conectar()-> prepare("INSERT INTO $tabla  VALUES (NULL, :idPrograma ,:datos)");        
 
-        $stmt -> bindparam(":datos", $datos,PDO::PARAM_STR);
+        $stmt -> bindparam(":datos", 		$datos,PDO::PARAM_STR);
+        $stmt -> bindparam(":idPrograma",	$idPrograma,PDO::PARAM_STR);
 
-        if($stmt -> execute()) {
+        if($stmt -> execute()) 
+        {
 			return "exito";
-		}else{
+		}
 
+		else
+		{
 			return "error";
 		}
 		
-		
 		$stmt -> close();
-
-
-
 	}
 
-	public static function actualizarProgramasModel($tabla,$campo,$dato,$codigo)
+	//actualizar los programas de formacion
+	//-----------------------------------------------
+	public static function actualizarProgramasModel($datos,$tabla)
 	{
 
-		$stmt = Conexion::conectar()-> prepare("UPDATE $tabla SET $campo  = :dato WHERE $tabla.codigo = :id");
+		$stmt = Conexion::conectar()-> prepare("UPDATE $tabla SET nombre_programa  = :programa WHERE $tabla.id = :id");
 
-		$stmt -> bindparam(":dato", $dato,PDO::PARAM_STR);
-		$stmt -> bindparam(":id", $codigo,PDO::PARAM_STR);
+		$stmt -> bindparam(":programa", $datos["programa"],PDO::PARAM_STR);
+		$stmt -> bindparam(":id", $datos["id"],PDO::PARAM_STR);
 
 
        if($stmt -> execute()) {
@@ -497,34 +171,31 @@ class CrudNovedades extends Conexion
 		}
 
 		$stmt -> close();
-
-
-
 	}
 
 	#perfil usuario
 	#---------------------------------------------
-	public static function perfilUsuarioModel($documento,$tabla)
+	public static function perfilUsuarioModel($documento,$usuario,$tipo_documento)
 	{
-		$stmt = Conexion::conectar()-> prepare("select * from $tabla where documento_usuario = :docUsuario");
+		$stmt = Conexion::conectar()-> prepare("SELECT * from $usuario INNER JOIN $tipo_documento ON $usuario.tipo_documento = $tipo_documento.id_tipo where documento_usuario = :docUsuario");
 
 		$stmt -> bindparam(":docUsuario",$documento,PDO::PARAM_STR);
 		$stmt -> execute();
 		return $stmt -> fetch();
-
 		$stmt -> close();
 	}
 
 
 	#actualizar datos Desercion
     #--------------------------------------------------
-	public static function actualizarPerfilModel($datos,$tabla)
+	public static function actualizarPerfilModel($datos,$usuario)
 	{
-		$stmt = Conexion::conectar()-> prepare("UPDATE $tabla SET nombres = :nombres, apellidos = :apellidos, correo = :correo
-			WHERE $tabla.documento_usuario = :id");
+		$stmt = Conexion::conectar()-> prepare("UPDATE $usuario SET primer_nombre = :nombre1, segundo_nombre = :nombre2, primer_apellido = :apellido1,  segundo_apellido = :apellido2, correo = :correo WHERE $usuario.documento_usuario = :id");
 
-		$stmt -> bindparam(":nombres",		$datos["nombres"],PDO::PARAM_STR);
-		$stmt -> bindparam(":apellidos",	$datos["apellidos"],PDO::PARAM_STR);
+		$stmt -> bindparam(":nombre1",		$datos["nombre1"],PDO::PARAM_STR);
+		$stmt -> bindparam(":nombre2",		$datos["nombre2"],PDO::PARAM_STR);
+		$stmt -> bindparam(":apellido1",	$datos["apellido1"],PDO::PARAM_STR);
+		$stmt -> bindparam(":apellido2",	$datos["apellido2"],PDO::PARAM_STR);
 		$stmt -> bindparam(":correo",		$datos["correo"],PDO::PARAM_STR);
 		$stmt -> bindparam(":id",			$datos["id"],PDO::PARAM_STR);
 
@@ -545,7 +216,7 @@ class CrudNovedades extends Conexion
 	#-----------------------------------------------------
 	public static function validarContrasena($documento,$tabla)
 	{
-		 $stmt = Conexion::conectar()-> prepare("select * from $tabla where documento_usuario = :documento");
+		 $stmt = Conexion::conectar()-> prepare("SELECT * FROM $tabla WHERE documento_usuario = :documento");
 
 		 $stmt -> bindparam(":documento",		$documento,PDO::PARAM_STR);
 		 $stmt -> execute();

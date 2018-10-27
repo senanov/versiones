@@ -5,7 +5,7 @@ require_once "models/RegistroNovedades.php";
 require_once "controllers/RegistrarNovedad.php";
 require_once "controllers/Novedades.php";
 require_once "controllers/admin.php";
-require_once "controllers/Tabla.php";
+require_once "../views/modulos/Tabla.php";
 
 $seguridad= new Admin();
 $seguridad -> seguridad();
