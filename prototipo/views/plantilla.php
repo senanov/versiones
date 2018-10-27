@@ -50,8 +50,9 @@ $mvc -> enlacesPaginasController();
 <?php include "modulos/footer.php"; ?>
 
     <script src="views/js/jquery-3.3.1.min.js"> </script>
+    <script src="views/js/validar.js"> </script>
     <script src="views/js/bootstrap.min.js"> </script>
-    <script src="views/js/menu.js"></script>
+   
 
   
 </body>

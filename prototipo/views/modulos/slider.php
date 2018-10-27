@@ -24,11 +24,10 @@ if (isset($_SESSION["correo"]))
     $_SESSION["correo"]=0;
   }
 }
-$login=$_SESSION["login"];
 
-if (isset($login)) 
+if (isset($_SESSION["login"])) 
 {
-  if ($login==1)
+  if ($_SESSION["login"]==1)
   {
    echo '<div class="alert alert-danger alert-dismissible exito">
          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

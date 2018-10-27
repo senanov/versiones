@@ -26,7 +26,7 @@
 
         <div class="modal-body">
 
-         <div class="columna">
+         <div class="columna columna1">
      <center><img src="views/img/sena.png" width="136" height="132"/></center>
 
                   <!--formulario login -->

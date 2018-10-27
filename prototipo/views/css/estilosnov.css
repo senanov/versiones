@@ -63,40 +63,6 @@ box-shadow:0px 0px 40px #00CC00, 0px 0px;
 	right:0.5px;
 	z-index:200;
 }
-
-
-footer
-{
-	align-self:flex-end;
-	background-color:#000;
-	color:#fff;
-	font-family:Verdana, Geneva, sans-serif;
-	line-height:center;
-	width:100%;	
-	padding:5px 0px 10px 10px;
-	
-	}
-	
-footer > img
-{
-	width:150;
-	float:right;
-	
-	
-
-	}
-
-.img{
-	position:absolute;
-	right:35px;
-	top:1px;	
-	display:inline;
-	border-radius:20px;
-	}
-.logo{
-	position:absolute;
-	left:50px;
-	}
 	
 p
 {

@@ -20,7 +20,7 @@ font-family: sans-serif;
 
     border: 0px solid black;
 	width: 95%;
-	max-width: 500px;
+	max-width: 850px;
 	margin:auto;
 	background: #8F8F8F;
 	border-radius: 7px;
@@ -53,8 +53,19 @@ justify-content: space-between;
 
 }
 
+
+#ndocumento,#correo{
+
+margin-bottom: 8%;
+padding: 15px ;
+font-size: 16px;
+border-radius: 8px;
+border:2px solid #BDBDBD ;
+	
+}
+
 #input{
-margin-bottom: 15%;
+margin-bottom: 8%;
 padding: 15px ;
 font-size: 16px;
 border-radius: 8px;
@@ -76,21 +87,17 @@ border:2px solid #BDBDBD ;
 }
 #select{
 width: 48%;
-margin-bottom: 15%;
+margin-bottom: 8%;
 padding: 15px ;
-font-size: 16px;	
+font-size: 16px;
 }
-#select:hover{
-transform: scale(1.05);
-}
-.enviar{
 
+.enviar{
 background: red;
 color:#fff;
-margin: auto;
 padding: 10px 40px;
 cursor: pointer;
-
+margin-left:45%;
 }
 
 .enviar:active{

@@ -27,7 +27,8 @@ main
     margin-top: 0;
     overflow: auto;
     padding: 0px 5px;
-    width: 768px;
+    width: 1200px;
+    
     margin: auto;
     border-radius: 10px;  
 
@@ -94,7 +95,7 @@ textarea{
     width: 33.3%;
 }
 .width-6 {
-    width: 50%;
+    width: 49%;
 }
 .width-12{
 	width: 100%;
@@ -112,11 +113,7 @@ textarea{
     background: #047c96;
     cursor: pointer;
 }
-footer{
-	    position: fixed;
-    bottom: 0px;
-    width: 100%;
-}
+
 .derechos {
     background: rgba(0, 0, 0, 0.72);
     padding: 15px 0px;
