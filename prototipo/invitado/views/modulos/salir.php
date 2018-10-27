@@ -1,3 +1,3 @@
 <?php
-$salir = new Invitado();
+$salir = new Admin();
 $salir -> cerrarSesion();

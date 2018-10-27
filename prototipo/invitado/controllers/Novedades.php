@@ -1,231 +1,147 @@
 <?php
 class Novedades
 {
+	#Consultar novedades
+	#----------------------------------------------
+	public function consultarNovedadesController()
+	{
+		if (isset($_POST["docNovedad"]))
+		{
+			$documento=strip_tags($_POST["docNovedad"]);
+			$respuesta= CrudNovedades::consultarNovedadesModel($documento,"usuario","novedad","tipo_documento");
 
-    public function tabla($respuesta){
+			if ($respuesta["documento"]==$_POST["docNovedad"]) 
+			{
+				 if ($respuesta["id_novedad"] == 2 || $respuesta["id_novedad"] == 4) 
+				 {
+				 	$tabla = Tabla::reingreso_desercion($respuesta);
+					echo $tabla;
+				 }
 
-return '<table class="table table-bordered table-striped table-hover table-reponsive">
-					
-					   <thead class="thead-dark">
-												
-						<tr class="bg-info"">
-						<th>Nombres</th>
-						<td>'.$respuesta["nombre"].'</td>
-					    </tr>
+				 if ($respuesta["id_novedad"] == 1 || $respuesta["id_novedad"] == 3 || $respuesta["id_novedad"] == 5) 
+				 {
+				 	$tabla = Tabla::cambioJornada_aplazamiento_retiro($respuesta);
+				 	echo $tabla;
+				 }
 
-					    <tr class="bg-info">
-						<th>Apellidos</th>
-						<td>'.$respuesta["apellidos"].'</td>
-					    </tr>
+				 if ($respuesta["id_novedad"] == 6) 
+				 {
+				 	$tabla = Tabla::traslado($respuesta);
+				 	echo $tabla;
+				 }
+			}
 
-					    <tr class="bg-info">
-						<th>Tipo Documento</th>
-						<td>'.$respuesta["documento"].'</td>
-					    </tr>
+			else
+			{
+				echo '<div class="alert alert-danger alert-dismissible">
+	            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	            <strong>Aviso:</strong> El aprendiz no presenta esta novedad </div><br>';
+			}	
+		}
+	}
 
-					    <tr class="bg-info">
-						<th>Numero Documento</th>
-						<td>'.$respuesta["numero_documento"].'</td>
-					    </tr>
+	#consultar perfil
+	#-------------------------------------------
+	public function perfilUsuarioController()
+	{
+		$doc_usuario = $_SESSION["docPerfil"];
+		$respuesta = Crudnovedades::perfilUsuarioModel($doc_usuario,"usuario","tipo_documento");
 
-					    <tr class="bg-info">
-						<th>Grupo</th>
-						<td>'.$respuesta["grupo"].'</td>
-					    </tr>
+		if ($respuesta["documento_usuario"]==$_SESSION["docPerfil"]) 
+			{
+				$tabla = Tabla::perfil($respuesta,"edPerfil");
+				echo $tabla;
+			}
+	}
 
-					    <tr class="bg-info">
-						<th>Ficha</th>
-						<td>'.$respuesta["numero_ficha"].'</td>
-					    </tr>
-					   
-					    <tr class="bg-info">
-						<th>Trimestre</th>
-						<td>'.$respuesta["trimestre"].'</td>
-					    </tr>
+	#editar perfil
+	#------------------------------------------------
+	public function editarPerfilController()
+    {
+    	$documento=strip_tags($_GET["idPerfil"]);
+    	$respuesta=CrudNovedades::perfilUsuarioModel($documento,"usuario","tipo_documento");
 
-					    <tr class="bg-info">
-						<th>Jornada</th>
-						<td>'.$respuesta["jornada"].'</td>
-					    </tr>
-
-					    <tr class="bg-info">
-						<th>Programa de Formación</th>
-						<td>'.$respuesta["programa_formacion"].'</td>
-					    </tr>
-
-					    <tr class="bg-info">
-						<th>Sede</th>
-						<td>'.$respuesta["sede"].'</td>
-					    </tr>
-
-					    <tr class="bg-info">
-						<th>Fecha Novedad</th>
-						<td>'.$respuesta["fecha"].'</td>
-					    </tr>
-
-
-						</thead>
-
-                 		
-					  </table>';
-
-
-
-
-
+    	$tabla = Tabla::editarPerfil($respuesta);
+    	echo $tabla;
     }
 
-	#Consulta reingreso
-	#----------------------------------------------
-	public function consultarReingresoController()
-	{
-		if (isset($_POST["docReingreso"])) 
-		{
-			$documento=$_POST["docReingreso"];
-			$respuesta= CrudNovedades::consultarReingresoModel($documento,"f_reingreso");
-			if ($respuesta["numero_documento"]==$_POST["docReingreso"]) 
-			{
+    #actualizar datos perfil
+    #--------------------------------------------------
+    public function actualizarPerfilController()
+    {
+    	if (isset($_POST["nombre1"])) 
+    	{
+    		$datos = array('nombre1' => strip_tags($_POST["nombre1"]), 'nombre2' => strip_tags($_POST["nombre2"]), 'apellido1' => strip_tags($_POST["apellido1"]), 'apellido2' => strip_tags($_POST["apellido2"]), 'correo' => strip_tags($_POST["correo"]),
+    			'id' => strip_tags($_POST['id']));
 
-			$tabla = Novedades::tabla($respuesta);
-			echo $tabla;
-				
-			}
+    		$respuesta = CrudNovedades::actualizarPerfilModel($datos,"usuario");
 
-			else 
-			{
-				echo '<div class="alert alert-danger alert-dismissible">
+    		if ($respuesta=="exito") 
+    		{
+    			$_SESSION["aviso"]=1;
+    			echo '<meta http-equiv="refresh" content="0; url=perfil">';
+    		}
+
+    		else
+    		{
+    			echo "No se pudo actualizar el perfil";
+    		}
+    	}
+    }
+
+    #editar contraseña
+    #--------------------------------------------------
+    public function editarContrasenaController()
+    {
+    	$doc_usuario=$_SESSION["docPerfil"];
+    	$tabla = Tabla::editarContrasena();
+    	echo $tabla;
+
+    	if (isset($_POST["contrasena"]))
+    	{
+    		$encriptar = crypt(strip_tags($_POST["contrasena"]), '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+    		$validar=CrudNovedades::validarContrasena($doc_usuario,"usuario");
+
+    		if($validar["contrasena"]==$encriptar)
+    		{
+    			$encriptar1 = crypt(strip_tags($_POST["contrasena1"]), '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+    			
+    			$datos = array('contrasena1' => strip_tags($encriptar1), 'contrasena2' => strip_tags($_POST["contrasena2"]));
+
+    			if ($_POST['contrasena1']==$_POST["contrasena2"]) 
+    			{
+    				$respuesta = CrudNovedades::actualizarContrasenaModel($datos,"usuario",$doc_usuario);
+
+    				if ($respuesta=="exito") 
+    				{
+    					echo '<div class="alert alert-success alert-dismissible exito">
+					    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					    <strong>Exito! </strong>Se ha modificado su contraseña correctamente
+					    </div>';
+    				}
+
+    				else
+    				{
+    					echo "No se pudo realizar el cambio de la contraseña";
+    				}
+    			}
+
+    			else
+    			{
+    				echo '<div class="alert alert-danger alert-dismissible">
+		            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		            <strong>Aviso:</strong>  La Contraseña confirmada no coincide  
+		            </div>';
+    			}
+    		}
+    		   			
+    		else
+    		{
+    			echo '<div class="alert alert-danger alert-dismissible exito">
 	            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-	            <strong>Aviso:</strong> El aprendiz no presenta esta novedad </div><br>';
-			}	
-		}
-	}
-
-	#Consulta cambio de jornada
-	#----------------------------------------------
-	public function consultarCambioController()
-	{
-		if (isset($_POST["docCambio"])) 
-		{
-			$documento=$_POST["docCambio"];
-			$respuesta= CrudNovedades::consultarCambioModel($documento,"f_c_jornada");
-			if ($respuesta["numero_documento"]==$_POST["docCambio"]) 
-			{
-
-			$tabla = Novedades::tabla($respuesta);
-			echo $tabla;
-				
-			}
-
-			else 
-			{
-				echo '<div class="alert alert-danger alert-dismissible">
-	            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-	            <strong>Aviso:</strong> El aprendiz no presenta esta novedad </div><br>';
-			}	
-		}
-	}
-
-	#Consulta traslados
-	#----------------------------------------------
-	public function consultarTrasladoController()
-	{
-		if (isset($_POST["docTraslado"])) 
-		{
-			$documento=$_POST["docTraslado"];
-			$respuesta= CrudNovedades::consultarTrasladoModel($documento,"f_traslado");
-			if ($respuesta["numero_documento"]==$_POST["docTraslado"]) 
-			{
-
-			$tabla = Novedades::tabla($respuesta);
-			echo $tabla;
-				
-			}
-
-			else 
-			{
-				echo '<div class="alert alert-danger alert-dismissible">
-	            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-	            <strong>Aviso:</strong> El aprendiz no presenta esta novedad </div><br>';
-			}	
-		}
-	}
-
-	#Consulta retiros
-	#----------------------------------------------
-	public function consultarRetiroController()
-	{
-		if (isset($_POST["docRetiro"])) 
-		{
-			$documento=$_POST["docRetiro"];
-			$respuesta= CrudNovedades::consultarTrasladoModel($documento,"f_retiro");
-			if ($respuesta["numero_documento"]==$_POST["docRetiro"]) 
-			{
-
-			$tabla = Novedades::tabla($respuesta);
-			echo $tabla;
-				
-			}
-
-			else 
-			{
-				echo '<div class="alert alert-danger alert-dismissible">
-	            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-	            <strong>Aviso:</strong> El aprendiz no presenta esta novedad </div><br>';
-			}	
-		}
-	}
-
-	#Consulta aplazamiento
-	#----------------------------------------------
-	public function consultarAplazamientoController()
-	{
-		if (isset($_POST["docAplazamiento"])) 
-		{
-			$documento=$_POST["docAplazamiento"];
-			$respuesta= CrudNovedades::consultarAplazamientoModel($documento,"f_aplazamiento");
-			if ($respuesta["numero_documento"]==$_POST["docAplazamiento"]) 
-			{
-
-			$tabla = Novedades::tabla($respuesta);
-			echo $tabla;
-				
-			}
-
-			else 
-			{
-				echo '<div class="alert alert-danger alert-dismissible">
-	            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-	            <strong>Aviso:</strong> El aprendiz no presenta esta novedad </div><br>';
-			}	
-		}
-	}
-
-	#Consulta desercion
-	#----------------------------------------------
-	public function consultarDesercionController()
-	{
-		if (isset($_POST["docDesercion"])) 
-		{
-			$documento=$_POST["docDesercion"];
-			$respuesta= CrudNovedades::consultarDesercionModel($documento,"f_desercion");
-			if ($respuesta["numero_documento"]==$_POST["docDesercion"]) 
-			{
-
-			$tabla = Novedades::tabla($respuesta);
-			echo $tabla;
-				
-			}
-
-			else 
-			{
-				echo '<div class="alert alert-danger alert-dismissible">
-	            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-	            <strong>Aviso:</strong> El aprendiz no presenta esta novedad </div><br>';
-			}	
-		}
-	}
-
-
-
-}
-
+	            <strong>Aviso:</strong>  La Contraseña Actual  no coincide  
+	            </div>';
+    		}
+    	}
+    }
+}#clase

@@ -2,11 +2,17 @@
 class EnlacesPaginas
 {
 	public static function enlacesModel($enlaces)
-	{
-		if($enlaces == "aplazamiento" || $enlaces == "desercion" || $enlaces == "cambio_jornada"
-			|| $enlaces == "traslado" || $enlaces == "retiro" || $enlaces == "reingreso") 
+	{   
+		#carpeta consultas
+        #-----------------------------------
+		if($enlaces == "consulta_novedades" || $enlaces == "perfil") 
 		{
 			$modulo="views/modulos/consultas/" . $enlaces . ".php"; 
+		}
+
+		elseif($enlaces == "edPerfil") 
+		{
+			$modulo="views/modulos/editar/" . $enlaces . ".php"; 
 		}
 
 		elseif($enlaces == "index") 

@@ -12,7 +12,7 @@
           <h1>SENANOV</h1>
           <hr>
           <p>Sistema de Información Especializado en la Gestión de Novedades en el CEET</p>
-          <div class="boton"><?php Invitado::nombreUsuario(); ?>
+          <div class="boton"><?php Admin::nombreUsuario(); ?>
             
           </div>
         </div>

@@ -6,4 +6,5 @@ Mónica Díaz <br />
 Daniel Acosta <br />
 Felipe Pinzón <br />
 Juan David Ramirez | SENANOV
+<center>Copyright: Senanov</center>
 </footer>

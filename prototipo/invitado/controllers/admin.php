@@ -1,5 +1,6 @@
 <?php
-class Invitado
+session_start();
+class Admin
 {
 	public function plantilla()
 	{
@@ -22,6 +23,22 @@ class Invitado
 		include $respuesta;
 	}
 
-}
+	public function seguridad()
+	{
+		if ($_SESSION["ingreso"]!="1")
+		{
+   			header("location: ../index");	
+		}		
+	}
 
-?>
+	public function cerrarSesion()
+	{
+		$_SESSION["ingreso"]=0;
+		echo '<meta http-equiv="refresh" content="0; url=index.php">';
+	}
+
+	public function nombreUsuario()
+	{
+		echo $_SESSION["nombre"]." ".$_SESSION["apellido"]."<br><center>". $_SESSION["rol"]."</center>";
+	}
+}
