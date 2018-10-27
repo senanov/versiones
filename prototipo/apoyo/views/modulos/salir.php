@@ -1,3 +1,3 @@
 <?php
-$salir = new Apoyo();
+$salir = new Admin();
 $salir -> cerrarSesion();

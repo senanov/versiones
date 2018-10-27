@@ -21,18 +21,17 @@
 include "views/modulos/banner.php";
 include "views/modulos/menu.php";
 
-$enlaces = new Apoyo();
+$enlaces = new Admin();
 $enlaces -> enlacesController();
 
+?>
+
+<?php
 include "views/modulos/footer.php";
 ?>
 
-
-
-
-
-
 <script src="../views/js/jquery-3.3.1.min.js"> </script>
+<script src="../views/js/busca.js"> </script>
 <script src="../views/js/bootstrap.min.js"> </script>
 
 </body>

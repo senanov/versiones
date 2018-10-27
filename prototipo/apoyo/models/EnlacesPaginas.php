@@ -13,17 +13,13 @@ class EnlacesPaginas
         
         #carpeta consultas
         #-----------------------------------
-		elseif($enlaces == "aplazamiento" || $enlaces == "desercion" || $enlaces == "cambio_jornada"
-			|| $enlaces == "traslado" || $enlaces == "retiro" || $enlaces == "reingreso"||$enlaces == "consultaGeneral"|| $enlaces == "programas" || $enlaces == "perfil") 
+		elseif($enlaces == "consulta_novedades" || $enlaces == "consultaGeneral" || $enlaces == "perfil") 
 		{
 			$modulo="views/modulos/consultas/" . $enlaces . ".php"; 
 		}
         #carpeta editar
         #-----------------------------------
-		elseif($enlaces == "edReingreso"||$enlaces == "edCambio_jornada"||
-	           $enlaces == "edTraslado"||$enlaces == "edRetiro"||
-	           $enlaces == "edAplazamiento"||$enlaces == "edDesercion"||
-	           $enlaces == "edPerfil") 
+		elseif($enlaces == "edNovedades" || $enlaces == "edPerfil") 
 		{
 			$modulo="views/modulos/editar/" . $enlaces . ".php"; 
 		}

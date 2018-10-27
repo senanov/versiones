@@ -23,22 +23,9 @@
 
       </li>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="NOVEDADES.PHP" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Consultar</a>
-
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">          
-          <a class="dropdown-item" href="reingreso">Reingreso</a>
-          <a class="dropdown-item" href="cambio_jornada">Cambio de Jornada</a>
-          <a class="dropdown-item" href="traslado">Traslado</a>
-           <a class="dropdown-item" href="retiro">Retiros</a>
-          <a class="dropdown-item" href="aplazamiento">Aplazamientos</a>
-          <a class="dropdown-item" href="desercion">Deserciones</a>
-        </div>
-      </li>
-
       <li class="nav-item">
-        <a class="nav-link" href="consultaGeneral">
-         Consulta General
+        <a class="nav-link" href="consulta_novedades">
+         Consultar Novedades
         </a>
       </li>
 
@@ -50,7 +37,7 @@
 
       <li class="nav-item">
         <a class="nav-link" href="salir">
-         Cerrar sesion
+         Cerrar Sesion
         </a>
       </li>
     </ul>
