@@ -1,0 +1,216 @@
+.ayuda1{
+	align-self:flex-end;
+	background-color:#046275;
+	color:#FFF;
+	text-align:center;
+	font-size:20px;
+	transition:1000ms;
+	max-width:1378px;
+	margin:auto;
+	
+}
+.ayuda{
+	background-color:#D7D7D7;
+	
+	}
+
+.div  > img{
+	border-color:#FFF;
+	
+	}
+
+body{
+	margin:0;
+	padding:0;
+	min-height:100vh;
+	flex-wra:wra;
+	}
+	
+.ayuda1:hover{
+	background-color:#000;
+
+	}
+
+
+.cont {
+	background-image: url(../img/tecnologia.jpg);
+	height: 500px;
+	border-radius: 10px;
+	box-shadow:20px 20px 20px #000000, 0px 0px;
+    margin: auto;
+
+
+}
+
+#fila {
+	
+	
+	
+	height: 100%;
+	top: 25%;	
+	width: 100%; 
+	max-width: 95%;
+	margin:auto; 
+
+
+	
+}
+
+#columna {
+	padding: 40px 40px;
+	top: 20px;
+	background-color:rgba(0,0,255,0.2);
+	width: 80%; 
+	max-width: 65%;
+	height: 80%;
+	margin:auto; 
+	box-shadow:20px 20px 20px #000000, 0px 0px;
+	border-radius: 10px;
+}
+ 
+#columna  h2
+{
+	color:white;
+    padding: 20px;
+    text-align: center;
+}
+
+#consultar{
+
+height: 35px;
+border-radius: 8px;
+background: #E6E6E6;
+margin: auto;
+width: 35%;
+margin-left: 25%;
+
+}
+
+#ress
+{
+	font-size: 20px;
+	height: 35px;
+    width: 250px;
+    background: #084B8A;
+    border-color:white;
+    color: white;
+    border-radius: 10px;
+    margin: auto;
+    margin-left: 25%;
+}
+
+#smm{
+height: 35px;
+width: 20%;
+background: green;
+border-bottom:;
+border-radius: 10px;
+border-color:white;
+color: white;
+margin-left: 30%;
+transition: 400ms;
+
+}
+
+#smm:hover{
+background: rgba(0,255,0,0.6);
+transform: scale(1.05);
+
+}
+
+.bt
+{
+font-size: 20px;
+height: 35px;
+width: 200px;
+background: green;
+border-radius: 10px;
+border-color:white;
+color: white;
+}
+
+#sd
+{
+background: green;
+border-bottom:;
+border-radius: 10px;
+border-color:white;
+color: white;
+transition: 400ms;
+height: 35px;
+width: 100px;
+}
+
+#restablecer
+{
+border-radius: 8px;
+background: #E6E6E6;
+margin: auto;
+}
+
+#contenedor1{
+
+    background-image: url(../img/tecnologia.jpg);
+	height: 500px;
+	border-radius: 10px;
+	box-shadow:20px 20px 20px #000000, 0px 0px;
+
+}
+
+#fila1{
+
+	padding: 40px 40px;
+	top: 20px;
+
+	background-color:rgba(0,0,255,0.2);
+	width: 80%; 
+	max-width: 65%;
+	height: 80%;
+	margin:auto; 
+	box-shadow:20px 20px 20px #000000, 0px 0px;
+	border-radius: 10px;
+}
+
+.bt1{
+font-size: 20px;
+height: 35px;
+width: 200px;
+background: green;
+border-bottom:;
+border-radius: 10px;
+border-color:white;
+color: white;
+
+}
+
+.bt1:hover{
+background: rgba(0,255,0,0.6);
+
+
+}
+.programa{
+
+width: 300px;
+height: 35px;
+border-radius: 5px;
+
+}
+
+#contrasena
+{
+width: 250px;
+height: 35px;
+border-radius: 5px;
+}
+
+#guardar
+{
+font-size: 20px;
+height: 35px;
+width: 150px;
+background: green;
+border-bottom:;
+border-radius: 10px;
+border-color:white;
+color: white;
+}
