@@ -17,7 +17,7 @@ class Controller
 
     
     #cargar vista
-	public function vista($vista ,$datos = [])
+	public function vista($vista ,$datos = [],$datos2 = [])
 	{
 		#chequeamos si el archivo vista existe
 		if (file_exists('../app/views/'.$vista.'.php')) {
@@ -30,6 +30,7 @@ class Controller
 		
 
 	}
+	
 	
 	
 }
