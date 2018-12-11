@@ -9,6 +9,15 @@ class ProgramaModel
         $this->db = new Base();
     }
 
+    public function programaAjaxModel($id){
+        $this->db->query("SELECT * from programa INNER JOIN tipo_programa ON programa.id_tipo_programa=tipo_programa.id_programa WHERE id = :id");
+        $this->db->bind(":id", $id);
+        $this->db->execute();
+        return $this->db->registro();
+
+
+    }
+
     public function validarProgramaModel($nombre, $tprograma)
     {
 
@@ -23,7 +32,7 @@ class ProgramaModel
     public function registrarProgramaModel($nombre, $tprograma)
     {
 
-        $this->db->query("INSERT INTO $tabla  VALUES (NULL, :tprograma ,:id)");
+        $this->db->query("INSERT INTO programa  VALUES (NULL, :tprograma ,:id)");
 
         $this->db->bind(":id", $nombre);
         $this->db->bind(":tprograma", $tprograma);

@@ -38,6 +38,26 @@ class UsuarioModel
 
     }
 
+    #Completar registro de usuario
+    public function completarRegistroModel($datos)
+    {
+        $this->db->query(" UPDATE  usuario  SET  contrasena  = :contra,  correo  = :correo,  rol  = :rol,  estado  = :estado WHERE  usuario . documento_usuario  = :ndocumento");
+        #vincular valores
+        $this->db->bind(":ndocumento", $datos["ndocumento"]);        
+        $this->db->bind(":contra", $datos["contra"]);
+        $this->db->bind(":correo", $datos["correo"]);
+        $this->db->bind(":rol", $datos["rol"]);
+        $this->db->bind(":estado", $datos["estado"]);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+
+            return false;
+        }
+
+    }
+
     #Validar si un suario ya se encuentra registrado con el Documento o Coreo
     public function ValidarUsuarioModel($datos)
     {
@@ -85,6 +105,15 @@ class UsuarioModel
         return $this->db->registro();
     } #fin del metodo
 
+    public function consultarUsuariosModel()
+    {
+
+        $this->db->query("SELECT * FROM usuario INNER JOIN tipo_documento on usuario.tipo_documento=tipo_documento.id_tipo INNER JOIN rol ON usuario.rol=rol.id_rol INNER JOIN estado ON usuario.estado=estado.id_estado");
+
+        $this->db->execute();
+        return $this->db->registros();
+
+    } #fin del metodo
     public function consultarUsuarioModel($documento)
     {
 
@@ -99,9 +128,8 @@ class UsuarioModel
     public function editarUsuarioModel($datos)
     {
 
-        $this->db->query("UPDATE usuario SET documento_usuario = :ndocumento, tipo_documento = :tdocumento, rol = :rol, estado = :estado WHERE usuario.documento_usuario = :id");
+        $this->db->query("UPDATE usuario SET  tipo_documento = :tdocumento, rol = :rol, estado = :estado WHERE usuario.documento_usuario = :id");
 
-        $this->db->bind(":ndocumento", $datos["ndocumento"]);
         $this->db->bind(":tdocumento", $datos["tdocumento"]);
         $this->db->bind(":rol", $datos["rol"]);
         $this->db->bind(":estado", $datos["estado"]);
