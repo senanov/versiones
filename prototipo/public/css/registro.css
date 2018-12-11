@@ -54,7 +54,7 @@ justify-content: space-between;
 }
 
 
-#ndocumento,#correo{
+/*#ndocumento,#correo{
 
 margin-bottom: 8%;
 padding: 15px ;
@@ -62,7 +62,7 @@ font-size: 16px;
 border-radius: 8px;
 border:2px solid #BDBDBD ;
 	
-}
+}*/
 
 #input{
 margin-bottom: 8%;
