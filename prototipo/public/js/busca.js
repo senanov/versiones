@@ -21,8 +21,8 @@ $("#ficha").change(function()
 			$('#trimestreInput').val(datos.numero_trimestre);
 			$('#jornadainput').val(datos.tipo_jornada);
 			$('#programainput').val(datos.nombre_programa);
-			$('input[id="'+datos.nombre_sede+'"]').prop("checked", true);
-
+			// $('input[id="'+datos.nombre_sede+'"]').prop("checked", true);
+			$('#sede').val(datos.nombre_sede);
 			//console.log(datos);
 
 		},error: function(respuesta){
