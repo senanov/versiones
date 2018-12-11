@@ -27,31 +27,52 @@ class Usuario extends Controller
         #validamos si vienen valores por el metodo Post
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             #recibimos la contraseña y la encriptamos y hacemos el arreglo de datos
-            $encriptar = crypt($_POST["contra"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-            $datos     = array("ndocumento" => strip_tags(trim($_POST["ndocumento"])), "tdocumento"  => strip_tags($_POST["tdocumento"]),
-                "primer_nombre"                 => strip_tags($_POST["primer_nombre"]), "segundo_nombre" => strip_tags($_POST["segundo_nombre"]), "primer_apellido" => strip_tags($_POST["primer_apellido"]), "segundo_apellido" => strip_tags($_POST["segundo_apellido"]),
-                "contra"                        => strip_tags($encriptar), "contra1"                     => strip_tags($_POST["contra1"]), "correo"                 => strip_tags($_POST["correo"]), "rol"                       => "3", "estado" => "1");
+            if (isset($_POST["ndocumento"])) {
+                $encriptar = crypt($_POST["contra"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+                $datos     = array("ndocumento" => strip_tags(trim($_POST["ndocumento"])), "tdocumento"  => strip_tags($_POST["tdocumento"]),
+                    "primer_nombre"                 => strip_tags($_POST["primer_nombre"]), "segundo_nombre" => strip_tags($_POST["segundo_nombre"]), "primer_apellido" => strip_tags($_POST["primer_apellido"]), "segundo_apellido" => strip_tags($_POST["segundo_apellido"]),
+                    "contra"                        => strip_tags($encriptar), "contra1"                     => strip_tags($_POST["contra1"]), "correo"                 => strip_tags($_POST["correo"]), "rol"                       => "3", "estado" => "1");
+            }if (isset($_POST["ndocumento1"])) {
+                $encriptar = crypt($_POST["contra"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+                $datos     = array("ndocumento" => strip_tags(trim($_POST["ndocumento1"])), "contra" => strip_tags($encriptar),  "correo"=> strip_tags($_POST["correo"]), "rol" => "3", "estado" => "1");
+            }
+            
 
             #validamos si las contraseña y su confirmacion son diferentes
             if (strip_tags($_POST["contra"]) != strip_tags($_POST["contra1"])) {
-                $datos = array('mensaje' => 'Las contraseñas no coinciden');
+                $datos = array('mensaje' => 'Las Contraseñas no Coinciden');
                 $this->vista("paginas/registrar", $datos);
             } else {
 
                 #Llamamos el metodo validarUsuarioModel para validar que no este registrado en la base de datos
                 if (!$this->usuarioModelo->validarUsuarioModel($datos)) {
                     if ($this->usuarioModelo->registrarUsuariomodel($datos)) {
-                        $datos = array('aviso' => 'El Usuario Se Registro con exito', 'alert' => 'success');
+                        $datos = array('aviso' => 'El Usuario se Registro con Exito', 'alert' => 'success');
                         $this->vista("paginas/inicio", $datos);
                     } else {
 
-                        $datos = array('mensaje' => 'algo salio mal');
+                        $datos = array('mensaje' => 'Algo Salio Mal');
                         $this->vista("paginas/registrar", $datos);
 
                     }
                 } else {
+                    $usuario = $this->usuarioModelo->validarUsuarioModel($datos);
+                    if ($usuario->contrasena == 'N/A' && $usuario->correo == 'N/A') {
+                       
+                        if ($this->usuarioModelo->completarRegistroModel($datos)) {
+                            $datos = array('aviso' => 'El Usuario se Registro con Exito', 'alert' => 'success');
+                            $this->vista("paginas/inicio", $datos);
+                        } else {
+
+                            $datos = array('mensaje' => 'Algo Salio Mal');
+                            $this->vista("paginas/registrar", $datos);
+
+                        }
+                    }else{
                     $datos = array('mensaje' => 'Un usuario ya se encuentra registrado con este Numero de documento o Correo');
                     $this->vista("paginas/registrar", $datos);
+                    }
+                    
                 }
             }
 
@@ -128,7 +149,7 @@ class Usuario extends Controller
         }
     } #fin del metodo
 
-    #restablecer la contraseña
+    #modificar la contraseña
     public function restablecerPassword()
     {
 
@@ -141,8 +162,8 @@ class Usuario extends Controller
 
                 if ($respuesta = $this->usuarioModelo->restablecerPasswordModel($cambiar, $_SESSION["correo"])) {
 
-                    $_SESSION["correo"]=0;
-                    $datos = array('aviso' => 'La Contraseña Se Cambio Con Exito', 'alert' => 'success');
+                    $_SESSION["correo"] = 0;
+                    $datos              = array('aviso' => 'La Contraseña Se Cambio Con Exito', 'alert' => 'success');
                     $this->vista("paginas/inicio", $datos);
                 } else {
                     $datos = array('aviso' => 'Algo Salio Mal No se Pudo Cambiar La Contraseña ', 'alert' => 'danger');
@@ -155,7 +176,7 @@ class Usuario extends Controller
             }
 
         } else {
-            if ($_SESSION["correo"]!=0) {
+            if ($_SESSION["correo"] != 0) {
                 $this->vista("paginas/restablecerPassword");
             } else {
                 redireccionar("/usuario");
@@ -173,7 +194,7 @@ class Usuario extends Controller
 
             $encriptar = crypt(strip_tags($_POST["contrai"]), '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
-            if ($respuesta = $this->usuarioModelo->loginModel(strip_tags($_POST["usuario"]))) {
+            if ($respuesta = $this->usuarioModelo->loginModel(strip_tags(trim($_POST["usuario"])))) {
 
                 if ($respuesta->documento_usuario == $_POST["usuario"] && $respuesta->contrasena == $encriptar && $respuesta->estado == 1) {
 
@@ -185,6 +206,7 @@ class Usuario extends Controller
                     $_SESSION["ingreso"]   = $respuesta->rol;
                     $_SESSION["usuario"]   = "$nombre $apellido <br> <center>$rol</center>";
                     $_SESSION["docPerfil"] = $respuesta->documento_usuario;
+                    $_SESSION["seguridad"] = 1;
 
                     redireccionar("/novedad/index");
                 } else {
@@ -209,58 +231,41 @@ class Usuario extends Controller
 
     } #fin del metodo
 
-    public function consultarUsuario()
+    public function consultarUsuarios()
     {
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            #borramos los caracteres especiales si bienen en el inpun y los espacion del inicio y fin y lo asignamos a la variable documento
-            #si la consulta es diferente al documento del super administrador
-            if (strip_tags(trim($_POST["docUsuario"])) != SUPER_ADMINISTRADOR) {
-                $documento = strip_tags(trim($_POST["docUsuario"]));
-
-                #si se encuentran datos los enviamos a la vista;
-                if ($datos = $this->usuarioModelo->consultarUsuarioModel($documento)) {
-
-                    $this->vista("usuario/consultas/consultarUsuario", $datos);
-
-                    #si no se encuentran datos el usuario no presenta noivedad
-                } else {
-                    $datos = array('aviso' => 'El usuario no presenta Registro', 'alert' => 'danger');
-
-                    $this->vista("usuario/consultas/consultarUsuario", $datos);
-                }
-            } else {
-
-                $datos = array('aviso' => 'Super administrador', 'alert' => 'success');
-                $this->vista("usuario/consultas/consultarUsuario", $datos);
-
-            }
-
-        } else {
-
-            $this->vista("usuario/consultas/consultarUsuario");
+        if ($_SESSION["ingreso"] != 0 && $_SESSION["ingreso"] != 1) {
+            redireccionar("/novedad");
         }
 
-    } #fin del metodo
+        $usuarios = $this->usuarioModelo->consultarUsuariosModel();
+        $datos    = array('usuarios' => $usuarios);
+        $this->vista("usuario/consultas/consultarUsuario", $datos);
+
+    }
 
     public function editarUsuario($id = 0)
     {
+        if ($_SESSION["ingreso"] != 0 && $_SESSION["ingreso"] != 1) {
+            redireccionar("/novedad");
+        }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-            $datos = array('ndocumento' => strip_tags($_POST["ndocumento"]), 'tdocumento' => strip_tags($_POST["tdocumento"]), 'rol' => strip_tags($_POST["rol"]), 'estado' => strip_tags($_POST["estado"]), 'id' => strip_tags($_POST["id"]));
+            $datos = array('tdocumento' => strip_tags($_POST["tdocumento"]), 'rol' => strip_tags($_POST["rol"]), 'estado' => strip_tags($_POST["estado"]), 'id' => strip_tags($_POST["id"]));
 
-            if ($_SESSION["docPerfil"] != $_POST["ndocumento"] && $_SESSION["rol"] == "1" && $_POST["rol"] != "1") {
+            if ($_SESSION["docPerfil"] != $_POST["id"] && $_SESSION["rol"] == "1" && $_POST["rol"] != "1") {
 
                 $respuesta = $this->usuarioModelo->editarUsuarioModel($datos);
 
                 if ($respuesta) {
-                    $datos             = $this->usuarioModelo->consultarUsuarioModel($datos["id"]);
+                    $usuarios          = $this->usuarioModelo->consultarUsuariosModel($datos["id"]);
+                    $datos             = array('usuarios' => $usuarios);
                     $_SESSION["exito"] = 1;
                     $this->vista("usuario/consultas/consultarUsuario", $datos);
 
                 } else {
-                    echo 'no se realizo la actualizacion';
+                    echo 'no se realizó la actualizacion';
                 }
 
             } else {
@@ -269,16 +274,18 @@ class Usuario extends Controller
 
                     $respuesta = $this->usuarioModelo->editarUsuarioModel($datos);
                     if ($respuesta) {
-                        $datos = $this->usuarioModelo->consultarUsuarioModel($datos["id"]);
+                        $_SESSION["exito"] = 1;
+                        $usuarios          = $this->usuarioModelo->consultarUsuariosModel($datos["id"]);
+                        $datos             = array('usuarios' => $usuarios);
                         $this->vista("usuario/consultas/consultarUsuario", $datos);
 
                     } else {
-                        echo 'no se realizo la actualizacion';
+                        echo 'no se realizó la actualizacion';
                     }
                 } else {
-                    $respuesta = $this->usuarioModelo->consultarUsuarioModel($id);
-                    $datos     = array('aviso' => 'No tienes permisos de Super administrador', 'ed' => $respuesta);
-                    $this->vista("usuario/editar/editarUsuario", $datos);
+                    $usuarios = $this->usuarioModelo->consultarUsuariosModel();
+                    $datos    = array('aviso' => 'No tienes permisos de Super administrador', 'usuarios' => $usuarios);
+                    $this->vista("usuario/consultas/consultarUsuario", $datos);
 
                 }
 
@@ -286,9 +293,11 @@ class Usuario extends Controller
 
         } else {
 
+            $usuarios  = $this->usuarioModelo->consultarUsuariosModel();
+            $datos     = array('usuarios' => $usuarios);
             $respuesta = $this->usuarioModelo->consultarUsuarioModel($id);
-            $datos     = array('ed' => $respuesta);
-            $this->vista("usuario/editar/editarUsuario", $datos);
+            $datos2    = array('ed' => $respuesta);
+            $this->vista("usuario/consultas/consultarUsuario", $datos, $datos2);
 
         }
 
@@ -310,10 +319,10 @@ class Usuario extends Controller
     #metodo para actualizar los datos del perfil
     public function editarPerfil()
     {
-        #Consultamos los datos del usuairo para imprimirlos en las vistas que llamamos acontinuación
+        #Consultamos los datos del usuario para imprimirlos en las vistas que llamamos acontinuación
         $datosUsuario = $this->usuarioModelo->consultarUsuarioModel($_SESSION["docPerfil"]);
 
-        #Si la varialble post pass tiene contenido
+        #Si la variable post pass tiene contenido
         if (isset($_POST["pass"])) {
             #encriptamos la contraseña que viene en la variable pass
             $encriptar = crypt(strip_tags($_POST["pass"]), '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
@@ -388,5 +397,12 @@ class Usuario extends Controller
         } #fin del else padre
 
     } #fin del metodo
+
+    public function cerrarSesion()
+    {
+
+        $_SESSION["seguridad"] = 0;
+        redireccionar("/usuario/index");
+    }
 
 } #fin de la clase

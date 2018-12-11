@@ -9,8 +9,13 @@ class Ficha extends Controller
         $this->programa = $this->modelo("ProgramaModel");
     }
 
+    
     public function registrarFicha()
     {
+
+        if ($_SESSION["ingreso"]!=0 && $_SESSION["ingreso"]!=1  ) {
+            redireccionar("/novedad");
+        }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $ficha   = strip_tags(trim($_POST["num_ficha"]));
@@ -52,6 +57,10 @@ class Ficha extends Controller
 
      public function editarFicha($id = 0)
     {   
+
+        if ($_SESSION["ingreso"]!=0 && $_SESSION["ingreso"]!=1  ) {
+            redireccionar("/novedad");
+        }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 

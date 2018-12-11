@@ -10,6 +10,9 @@ class Programa extends Controller
 
     public function registrarPrograma()
     {
+        if ($_SESSION["ingreso"]!=0 && $_SESSION["ingreso"]!=1  ) {
+            redireccionar("/novedad");
+        }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -45,6 +48,9 @@ class Programa extends Controller
 
     public function consultarPrograma()
     {
+        if ($_SESSION["ingreso"]!=0 && $_SESSION["ingreso"]!=1  ) {
+            redireccionar("/novedad");
+        }
 
         $respuesta = $this->programa->consultarProgramaModel();
         $datos = array('ed' => $respuesta, );
@@ -54,6 +60,9 @@ class Programa extends Controller
 
     public function editarPrograma($id = 0)
     {   
+        if ($_SESSION["ingreso"]!=0 && $_SESSION["ingreso"]!=1  ) {
+            redireccionar("/novedad");
+        }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
