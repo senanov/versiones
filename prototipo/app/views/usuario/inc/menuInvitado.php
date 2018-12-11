@@ -7,31 +7,11 @@
     <ul class="navbar-nav">
       <li class="nav-item active ">
         <a class="nav-link" href="<?php echo RUTA_URL; ?>/novedad">Inicio <span class="sr-only">(current)</span></a>
-      </li>
-     
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">registrar novedad</a>
-
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">          
-          <a class="dropdown-item" href="<?php echo RUTA_URL; ?>/novedad/registrarNovedad/2">Reintegro</a>
-          <a class="dropdown-item" href="<?php echo RUTA_URL; ?>/novedad/registrarNovedad/3">Cambio de Jornada</a>
-          <a class="dropdown-item" href="<?php echo RUTA_URL; ?>/novedad/registrarNovedad/6">Traslado</a>
-           <a class="dropdown-item" href="<?php echo RUTA_URL; ?>/novedad/registrarNovedad/5">Retiros</a>
-          <a class="dropdown-item" href="<?php echo RUTA_URL; ?>/novedad/registrarNovedad/1">Aplazamientos</a>
-          <a class="dropdown-item" href="<?php echo RUTA_URL; ?>/novedad/registrarNovedad/4">Deserciones</a>
-        </div>
-
-      </li>
+      </li>    
 
       <li class="nav-item">
         <a class="nav-link" href="<?php echo RUTA_URL; ?>/novedad/consultarNovedad">
          Consultar Novedades
-        </a>
-      </li>
-
-       <li class="nav-item">
-        <a class="nav-link" href="<?php echo RUTA_URL; ?>/novedad/descargarFormato">
-         Formato Actas
         </a>
       </li>
 

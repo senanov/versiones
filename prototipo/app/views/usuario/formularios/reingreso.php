@@ -11,13 +11,140 @@ if ($_SESSION["rol"] == 1 || $_SESSION["rol"] == 0 ) {
 }
 
 ?>
-<main role="main">
 
-	<section class="content-form">
+<br></br></br>
+<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" method="post" action="" enctype="multipart/form-data" onsubmit="return validarFile();">
+				<input type="hidden" name="id" value="4">
+				<span class="contact100-form-title">
+					Datos del Aprendiz
+				</span>
 
-		<h2 class="sub-title">Formato de Reingreso Sena</h2>
+				<label class="label-input100" for="nom1_reingreso">Ingresa los Nombres</label>
+				<div class="wrap-input100 rs1-wrap-input100 validate-input">
+					<input class="input100" type="text" placeholder="Primer Nombre *" name="nom1_reingreso" id="nom1_reingreso" required>
+					<span class="focus-input100"></span>
+				</div>
+				<div class="wrap-input100 rs2-wrap-input100 validate-input">
+					<input class="input100" type="text" placeholder="Segundo Nombre" name="nom2_reingreso" id="nom2_reingreso">
+					<span class="focus-input100"></span>
+				</div>
 
-<?php
+				<label class="label-input100" for="apellido1">Ingresa los Apellidos</label>
+				<div class="wrap-input100 rs1-wrap-input100 validate-input">
+					<input class="input100" type="text" placeholder="Primer Apellido *" name="apellido1" id="apellido1" required>
+					<span class="focus-input100"></span>
+				</div>
+				<div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
+					<input class="input100" type="text" placeholder="Segundo Apellido" name="apellido2" id="apellido2">
+					<span class="focus-input100"></span>
+				</div>
+
+				<label class="label-input100" for="tdocumento">Tipo y Documento*</label>
+				<div class="wrap-input100 rs1-wrap-input100 validate-input">
+					<select name="tdocumento" class="input100" id="tdocumento" required>
+					  <option selected disabled value>Seleccione</option>
+				      <option value="1">Cédula de Ciudadanía</option>
+				      <option value="2">Tarjeta de Identidad</option>
+				      <option value="3">Cédula de Extranjeria</option>   
+				  </select> 
+					<span class="focus-input100"></span>
+				</div>
+				<div class="wrap-input100 rs2-wrap-input100 validate-input">
+					<input class="input100" type="text" placeholder="Numero de Documento *" name="documento" id="documento" minlength="8" maxlength="11" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
+					<span class="focus-input100"></span>
+				</div>
+
+				<label class="label-input100" for="ficha">Grupo y Ficha</label>
+				<div class="wrap-input100 rs1-wrap-input100 validate-input">
+					<input class="input100" type="text" placeholder="Grupo" name="grupo" id="grupo" maxlength="1"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+					<span class="focus-input100"></span>
+				</div>
+				<div class="wrap-input100 rs2-wrap-input100 validate-input">
+					<select class="input100" name="ficha" id="ficha">
+         				<option  value disabled selected>Seleccione</option>
+
+       					<?php
+							foreach ($datos["ficha"] as $fila) {
+    						echo "<option value=" . $fila->codigo_ficha . ">" . $fila->codigo_ficha . "</option>";
+							}
+						?>
+             		</select>
+					<span class="focus-input100"></span>
+				</div>
+
+				<label class="label-input100" for="trimestreInput">Trimestre y Jornada</label>
+				<div class="wrap-input100 rs1-wrap-input100 validate-input">
+					<input class="input100" type="text" name="trimestre" disabled id="trimestreInput" placeholder="Trimestre">
+					<span class="focus-input100"></span>
+				</div>
+				<div class="wrap-input100 rs2-wrap-input100 validate-input">
+					<input class="input100" type="text" name="jornada" disabled id="jornadainput" placeholder="Jornada">
+					<span class="focus-input100"></span>
+				</div>								
+
+				<label class="label-input100" for="programainput">Programa de Formación</label>
+				<div class="wrap-input100">
+					<input  class="input100" type="text" name="programa" disabled id="programainput" placeholder="Programa de Formación">
+					<span class="focus-input100"></span>
+				</div>
+
+				<label class="label-input100" for="sede">Sede</label>
+				<div class="wrap-input100">
+					<input class="input100" type="text" placeholder="Sede" name="sede" disabled id="sede">
+					<span class="focus-input100"></span>
+				</div>	
+
+				<label class="label-input100" for="fecha">Fecha de la Novedad*</label>
+				<div class="wrap-input100">
+					<input class="input100" type="date" name="fecha" id="fecha" value="<?php  echo date('Y-d-m'); ?>" step="1" required>
+					<span class="focus-input100"></span>
+				</div>	
+
+				<label class="label-input100" for="acta">Subir Acta</label>
+				<div class="wrap-input100">
+					<input class="input100" type="file" name="acta" id="acta" >
+					<span class="focus-input100"></span>
+				</div>				
+
+				<div class="container-contact100-form-btn">
+					
+					<input class="contact100-form-btn" type="submit" name="registrar" value="REGISTRAR NOVEDAD">	
+					
+				</div>
+			</form>
+
+			<div class="contact100-more flex-col-c-m" style="background-image: url('../../img/bg-01.jpg');">
+				<div class="flex-w size1 p-b-47">
+					<div class="txt1 p-r-25">
+						<span class="lnr lnr-map-marker"></span>
+					</div>
+
+					<div class="flex-col size2">
+						<span class="txt1 p-b-20">
+							Formulario de Reintegro
+						</span>
+
+					<div class="flex-col size2">
+						<span class="txt1 p-b-20">
+							Senanov
+						</span>
+					</div>
+				</div>
+
+				<div class="dis-flex size1 p-b-47">
+					<div class="txt1 p-r-25">
+						<span class="lnr lnr-phone-handset"></span>
+					</div>
+
+					<div class="flex-col size2">
+						<span class="txt1 p-b-20">
+							<i class="fas fa-folder"> </i> Registro de Novedad
+						</span>
+					</div>
+
+		<?php
 
 if (isset($datos["exito"])) {
 
@@ -38,111 +165,20 @@ if (isset($datos["aviso"])) {
 }
 
 ?>
-
-		<form method="POST" id="registrar-form" >
-		  <input type="hidden" name="id" value="4">
-			<div class="form-group width-12">
-
-				 <div class="width-6">
-				  <input type="text" placeholder="Primer nombre del Aprendiz *" class="form-control" name="nom1_reingreso" id="nombre1" required/>
-				 </div>
-
-				  <div class="width-6">
-				  <input type="text" placeholder="segundo nombre del Aprendiz *" class="form-control" name="nom2_reingreso" id="nombre2" required/>
-				  </div>
-
-				 <div class="width-6">
-				  <input type="text" placeholder="Primer apellido del Aprendiz *" class="form-control" name="apellido1" id="apellido1" required/>
-				 </div>
-
-				 <div class="width-6">
-				  <input type="text" placeholder="Segundo apellido del Aprendiz *" class="form-control" name="apellido2" id="apellido2" required/>
-				 </div>
-
-				 <div class="width-6">
-				  <select name="tdocumento" id="td">
-				      <option value="1">Cédula de Ciudadanía</option>
-				      <option value="2">Tarjeta de Identidad</option>
-				      <option value="3">Cédula de Extranjeria</option>
-				  </select>
-				 </div>
-
-				 <div class="width-6">
-				  <input type="text" placeholder="Numero de Documento *" class="form-control" name="documento" id="documento" minlength="8" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required />
-				 </div>
-
-				 <div class="width-6">
-				  <input type="text" placeholder="Grupo" class="form-control" name="grupo" id="grupo" />
-				 </div>
-
-				 <div class="width-6">
-			<select name="ficha" id="ficha">
-         <option disabled selected>selecionar</option>
-
-       <?php
-foreach ($datos["ficha"] as $fila) {
-    echo "<option value=" . $fila->codigo_ficha . ">" . $fila->codigo_ficha . "</option>";
-}
-?>
-             </select>
-				 </div>
-
-				 <div class="width-6" >
-				  <input class="form-control" name="trimestre" disabled id="trimestreInput" placeholder="Trimestre">
-				 </div>
-
-				 <div class="width-6">
-				   <input class="form-control" name="jornada" disabled id="jornadainput" placeholder="jornada">
-				 </div>
 				</div>
 
-			<div class="form-group">
-				 <div class="width-12">
-
-Programa de formacion<br>
-<input class="form-control" name="programa" disabled id="programainput">
-
-				 </div>
+				<div class="dis-flex size1 p-b-47">
+					<div class="txt1 p-r-25">
+						<span class="lnr lnr-envelope"></span>
+					</div>
+				</div>
 			</div>
+		</div>
+	</div>
+</div>
 
 
-			 <div class="form-group width-12">
-				  <h3 class="sub-form">Sede</h3>
-
-				  <div class="width-4">
-				    <label for="Restrepo" ><input disabled type="radio" id="Restrepo" name="sede" value="4" />Restrepo</label>
-				  </div>
-				  <div class="width-4">
-				    <label for="Ricaurte" ><input disabled type="radio" id="Ricaurte" name="sede" value="5" />Ricaurte</label>
-				  </div>
-				  <div class="width-4">
-				    <label for="Colombia" ><input disabled type="radio" id="Colombia" name="sede" value="2" />Colombia</label>
-				  </div>
-			 </div>
-
-			 <div class="form-group width-12">
-				  <div class="width-4">
-				    <label for="Alamos" ><input disabled type="radio" id="Alamos" name="sede" value="1"/>Alamos</label>
-				  </div>
-				  <div class="width-4">
-				    <label for="Complejo Sur"><input disabled type="radio" id="Complejo Sur" name="sede" value="3" />Complejo Sur</label>
-				  </div>
-			 </div>
-
-			 <div class="form-group width-12">
-				  <h3 class="sub-form">Fecha de ingreso</h3>
-				  <input type="date" name="fecha"  value="<?php echo date('Y-d-m'); ?>" step="1" class="form-control" required/>
-			 </div>
-
-			 <div class="form-group width-12">
-					<input type="submit" value="REGISTRAR NOVEDAD" class="form-control btn btn-principal" id="btn-registrar"/>
-
-			 </div>
-
-		</form>
-
-	</section>
-</main>
+	<div id="dropDownSelect1"></div>
 <?php
 require_once "../app/views/inc/footer.php";
 ?>

@@ -1,5 +1,5 @@
  <nav class="navbar navbar-expand-lg ">
-  <a class="navbar-brand" href="#">SENANOV</a>
+  <a class="navbar-brand" href="<?php echo RUTA_URL; ?>/novedad">SENANOV</a>
   <button class="navbar-toggler navbar-inverse" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon "><img src="<?php echo RUTA_URL; ?>/img/icono.png"></span>
   </button>
@@ -13,7 +13,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">registrar novedad</a>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">          
-          <a class="dropdown-item" href="<?php echo RUTA_URL; ?>/novedad/registrarNovedad/2">Reingreso</a>
+          <a class="dropdown-item" href="<?php echo RUTA_URL; ?>/novedad/registrarNovedad/2">Reintegro</a>
           <a class="dropdown-item" href="<?php echo RUTA_URL; ?>/novedad/registrarNovedad/3">Cambio de Jornada</a>
           <a class="dropdown-item" href="<?php echo RUTA_URL; ?>/novedad/registrarNovedad/6">Traslado</a>
            <a class="dropdown-item" href="<?php echo RUTA_URL; ?>/novedad/registrarNovedad/5">Retiros</a>
@@ -30,7 +30,7 @@
       </li>
 
        <li class="nav-item">
-        <a class="nav-link" href="<?php echo RUTA_URL; ?>/usuario/consultarUsuario">
+        <a class="nav-link" href="<?php echo RUTA_URL; ?>/usuario/consultarUsuarios">
          Consulta de Usuarios
         </a>
       </li>
@@ -48,13 +48,19 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo RUTA_URL; ?>/usuario/consultarPerfil">
-         Perfil del Usuario
+        <a class="nav-link" href="<?php echo RUTA_URL; ?>/novedad/descargarFormato">
+         Formato Actas
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo RUTA_URL; ?>/usuario/index">
+        <a class="nav-link" href="<?php echo RUTA_URL; ?>/usuario/consultarPerfil">
+         Perfil del Usuario
+        </a>
+      </li>       
+
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo RUTA_URL; ?>/usuario/cerrarSesion">
          Cerrar Sesion
         </a>
       </li>

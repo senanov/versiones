@@ -21,7 +21,9 @@ if ($_SESSION["rol"] == 1 || $_SESSION["rol"] == 0) {
     <input type="text" class="search form-control" placeholder="Buscar">
 </div>
 <span class="counter pull-right"></span>
-<table class="table table-hover table-bordered results ">
+<div class="table100 ver2 m-b-110">
+      <div id="div1" align="center">
+<table data-vertable="ver2" class="table table-hover table-bordered results "  >
 <?php
 if (isset($datos["aviso"])) {
 
@@ -39,7 +41,7 @@ if (isset($datos["aviso"])) {
     <th>Opciones</th>
     </tr>
     <tr class="warning no-result">
-      <td colspan="4"><i class="fa fa-warning"></i> No result</td>
+      <td colspan="4"><i class="fa fa-warning"></i> No hay resultado</td>
     </tr>
   </thead>
 <tbody>
@@ -55,16 +57,16 @@ if (isset($datos["id"])) {
           <tr class='bg-secondary'>
           <td><font color='white'>".$datos["id"]."</font></td>
           <td><font color='white'>$tprograma</font></td>
-              <td><input size='80%' type='text' name='programa' value='$programa'>
+              <td><input size='80%' type='text' name='programa' value='$programa' style='text-transform:uppercase;'' onkeyup='javascript:this.value=this.value.toUpperCase();'>
               <input  type='hidden' name='codigo' value='" .$fila->id. "'></td>
-              <td class='td'><input  type='submit' value='continuar' id='ip'>  | </td></tr></form>";
+              <td class='td'><input  type='submit' value='continuar' id='ip'></td></tr></form>";
         }else{
 
          echo '<tr>
         <td>' . $fila->id . '</td>
         <td>' . $fila->programa . '</td>
         <td>' . $fila->nombre_programa . '</td>
-        <td class="td" colspan="2"><center><a          href="'.RUTA_URL.'/programa/editarPrograma/'.$fila->id.'"><input id="ip" type="button" value="Editar"></a></center>
+        <td class="td" colspan="2"><center><a          href="'.RUTA_URL.'/programa/editarPrograma/'.$fila->id.'"><i class="fas fa-edit fa-2x "></i></a></center>
         </tr>';
 
 
@@ -78,7 +80,7 @@ if (isset($datos["id"])) {
         <td>' . $fila->id . '</td>
         <td>' . $fila->programa . '</td>
         <td>' . $fila->nombre_programa . '</td>
-        <td class="td" colspan="2"><center><a href="'.RUTA_URL.'/programa/editarPrograma/'.$fila->id.'"><input id="ip" type="button" value="Editar"></a></center>
+        <td class="td" colspan="2"><center><a href="'.RUTA_URL.'/programa/editarPrograma/'.$fila->id.'"><i class="fas fa-edit fa-2x "></i></a></center>
         </tr>';
     
   }
@@ -88,7 +90,8 @@ if (isset($datos["id"])) {
 ?>
    </tbody>
    </table>
-
+   <ul class="pagination pagination-lg pager" id="myPager"></ul>
+</div></div>
 
 
 </div></div></div>

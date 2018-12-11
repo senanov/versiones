@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="<?php echo RUTA_URL;?>/css/estiloserv.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo RUTA_URL;?>/css/registro.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo RUTA_URL;?>/css/estilos.css" />
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 </head>
 <body>
@@ -65,9 +65,9 @@
     Usuario</p>
     <p>
       <label for="usuario"></label>
-      <input class="input" type="text" name="usuario" id="usuario" placeholder="Numero de Documento" required />
+      <input class="input" type="text" name="usuario" id="usuario" minlength="7" maxlength="11" placeholder="Numero de Documento" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required />
     </p>
-    <p>contraseña</p>
+    <p>Contraseña</p>
     <p>
       <label for="contra"></label>
       <input class="input" type="password" name="contrai" id="contrai" placeholder="Contraseña" required />

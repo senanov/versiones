@@ -35,7 +35,7 @@ if (isset($datos["usuario"])) {
 
 ?>
        		<h2>Ingrese su numero de documento para consultar si ya se encuentra registrado</h2>
-       		<input id="consultar" type="text" name="consulta" placeholder="Numero de documento" required><br><br>
+       		<input id="consultar" type="text" name="consulta" placeholder="Numero de documento" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required><br><br>
        		<input  id="smm" type="submit" name="buscar">
     		</form><br>
     		<a href="<?php echo RUTA_URL; ?>/usuario/restablecer"><button id="ress">Restablecer Contraseña</button></a><br><br>

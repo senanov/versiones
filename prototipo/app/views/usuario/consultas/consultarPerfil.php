@@ -11,6 +11,12 @@ if ($_SESSION["rol"] == 1 || $_SESSION["rol"] == 0) {
 }
 
 ?>
+<style type="text/css">
+  
+  td{
+    background: white;
+  }
+</style>
 <br><br>
 
 <!-- los cambios se realizaron exitosamente   -->

@@ -160,6 +160,8 @@ if ($_SESSION["rol"] == 1 || $_SESSION["rol"] == 0 ) {
 ?>
 					  </table>
 					  </form>
+
+
 <?php endif?>
 
 </div></div></div>

@@ -32,7 +32,9 @@ if (isset($datos["aviso"])) {
     <input type="text" class="search form-control" placeholder="Buscar">
 </div>
 <span class="counter pull-right"></span>
-<table class="table table-hover table-bordered results ">
+<div class="table100 ver2 m-b-110">
+      <div id="div1" align="center">
+<table data-vertable="ver2" class="table table-hover table-bordered results "  >
  <thead class="thead-dark">
   <tr>
   <th>Numero de ficha</th>
@@ -44,7 +46,7 @@ if (isset($datos["aviso"])) {
   <th>Opciones</th>
   </tr>
     <tr class="warning no-result">
-      <td colspan="4"><i class="fa fa-warning"></i> No result</td>
+      <td colspan="4"> No hay resultado</td>
     </tr>
  </thead>
 <tbody>
@@ -60,10 +62,10 @@ if (isset($datos["id"])) {
                 $trimeste ='<option selected value='. $ficha->id_trimestre .'>'. $ficha->numero_trimestre .'</option>';
 
                    echo '<form method="post" action="'.RUTA_URL.'/ficha/editarFicha/">
-                   <tr>
+                   <tr >
                 <td>' . $ficha->codigo_ficha . '
                 <input type="hidden" name="ficha" value='.$ficha->codigo_ficha.'></td>
-                <td><select name="sede" id="td" required>
+                <td><select name="sede" id="sede" required>
                       '.$sede.'                     
                       <option value="1">Alamos</option>
                       <option value="2">Colombia</option>
@@ -71,7 +73,7 @@ if (isset($datos["id"])) {
                       <option value="4">Restrepo</option>
                       <option value="5">Ricaurte</option>
                   </select> </td>
-                <td><select name="jornada" id="td" required>
+                <td><select name="jornada" id="jornada" required>
                        '.$jornada.' 
                       <option value="1">Diurna</option>
                       <option value="2">Nocturna</option>
@@ -80,17 +82,48 @@ if (isset($datos["id"])) {
                 <td>' . $ficha->tipo_modalidad . '</td>
                 <td>' . $ficha->nombre_programa . '</td>
 
-
-                <td><select name="trimestre" id="td" required>
-                       '. $trimeste.'
-                      <option value="1">Primero</option>
+         
+                <td><select name="trimestre" id="trimestre" required>
+                       '. $trimeste;
+                       if ($ficha->id_tipo_programa==1&&$ficha->id_jornada==1) {
+                         echo'<option value="1">Primero</option>
+                             <option value="2">Segundo</option>';
+                       }else if($ficha->id_tipo_programa==1&&$ficha->id_jornada==2||$ficha->id_jornada==3){
+                        echo'<option value="1">Primero</option>
+                      <option value="2">Segundo</option>
+                      <option value="3">Tercero</option>
+                      <option value="4">Cuarto</option>';
+                       }else if($ficha->id_tipo_programa==2 &&$ficha->id_jornada==1){
+                        echo '<option value="1">Primero</option>
+                      <option value="2">Segundo</option>
+                      <option value="3">Tercero</option>
+                      <option value="4">Cuarto</option>
+                      <option value="5">Quinto</option>
+                      <option value="6">Sexto</option>';
+                       }else if ($ficha->id_tipo_programa==2&&$ficha->id_jornada==2||$ficha->id_jornada==3) {
+                        echo '<option value="1">Primero</option>
                       <option value="2">Segundo</option>
                       <option value="3">Tercero</option>
                       <option value="4">Cuarto</option>
                       <option value="5">Quinto</option>
                       <option value="6">Sexto</option>
                       <option value="7">Septimo</option>
-                      <option value="8">Octavo</option>
+                      <option value="8">Octavo</option>';
+                       }else if ($ficha->id_tipo_programa==3) {
+                        echo '<option value="1">Primero</option>
+                      <option value="2">Segundo</option>';
+                       }
+                       else{
+                        echo'<option value="1">Primero</option>
+                      <option value="2">Segundo</option>
+                      <option value="3">Tercero</option>
+                      <option value="4">Cuarto</option>
+                      <option value="5">Quinto</option>
+                      <option value="6">Sexto</option>
+                      <option value="7">Septimo</option>
+                      <option value="8">Octavo</option>';
+                       }
+                      echo'
                   </select> </td>
                   
                 <td><input  type="submit" value="continuar" id="ip"></td>
@@ -127,10 +160,11 @@ if (isset($datos["id"])) {
 ?>
 </tbody>
   </table>
-
+</div></div>
 
 
 </div></div></div>
+
 <?php
 require_once "../app/views/inc/footer.php";
 ?>

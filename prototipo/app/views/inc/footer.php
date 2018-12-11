@@ -3,8 +3,9 @@
 <script src="<?php echo RUTA_URL; ?>/js/busca.js"> </script>
 <script src="<?php echo RUTA_URL; ?>/js/validar.js"> </script>
 <script src="<?php echo RUTA_URL; ?>/js/tabla.js"> </script>
+<script src="<?php echo RUTA_URL; ?>/js/validarFile.js"> </script>
 <script src="<?php echo RUTA_URL; ?>/js/bootstrap.min.js"> </script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <br><br><br><br><br><br>
 <footer>
 <img src="<?php echo RUTA_URL; ?>/img/gsena.gif" width="150" height="102" />
